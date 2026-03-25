@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"/>
 <title>Sethu.V — Digital Architect & Brand Strategist</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Cormorant+Upright:wght@300;400;500&family=Jost:wght@200;300;400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
 <!-- Three.js for 3D background -->
@@ -825,7 +825,7 @@ footer{
 }
 .mob-overlay a:hover{color:var(--gold)}
 
-/* ── RESPONSIVE ── */
+/* ── ENHANCED RESPONSIVE MEDIA QUERIES ── */
 @media(max-width:1024px){
   nav,nav.scrolled{padding:1rem 2rem}
   .n-links{display:none}
@@ -846,15 +846,63 @@ footer{
   .exp-split{grid-template-columns:1fr;gap:2rem}
   footer{padding:1.5rem 2rem;flex-direction:column;text-align:center}
 }
-@media(max-width:600px){
-  .hero-name{font-size:3.5rem}
-  .skills-layout{grid-template-columns:1fr}
+@media(max-width:768px){
+  .hero{padding:0 1.5rem}
+  .hero-left{padding:4rem 0 2rem}
+  .hero-name{font-size:3rem}
+  .hero-name .last{margin-left:0}
+  .hero-title{white-space:normal}
+  .hero-title-line{flex-wrap:wrap}
+  .hero-stats{gap:1rem}
+  .hstat-num{font-size:2rem}
+  .hero-desc{font-size:.85rem}
+  .btn-royal,.btn-wa{padding:.6rem 1.2rem;font-size:.7rem}
+  .skills-layout{grid-template-columns:1fr;gap:0}
   .skills-layout .skill-box{border-right:1px solid var(--border)!important;border-bottom:none}
   .skills-layout .skill-box:last-child{border-bottom:1px solid var(--border)}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat-box:nth-child(2n){border-right:none}
-  section{padding:5rem 1.5rem}
-  .stats-strip{padding:3rem 1.5rem}
+  .stat-box:nth-child(3),.stat-box:nth-child(5){border-top:1px solid rgba(255,255,255,.07)}
+  section{padding:4rem 1.5rem}
+  .stats-strip{padding:2rem 1.5rem}
+  .exp-entry{padding:1.5rem}
+  .exp-year{font-size:2rem}
+  .exp-role{font-size:1.2rem}
+  .work-filter{gap:.4rem}
+  .wf-btn{padding:.3rem .8rem;font-size:.6rem}
+  .work-grid{gap:1rem}
+  .work-card .wc-body{padding:1rem}
+  .wc-title{font-size:1rem}
+  .wc-desc{font-size:.75rem}
+  .contact-lede{font-size:.9rem}
+  .c-detail{gap:.8rem;padding:1rem 0}
+  .c-icon{width:34px;height:34px;font-size:.8rem}
+  .c-val{font-size:.85rem}
+  .wa-direct-btn{padding:.8rem 1rem}
+}
+@media(max-width:480px){
+  .hero-name{font-size:2.5rem}
+  .typed-royal{font-size:1rem}
+  .hero-title{font-size:.6rem}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn-royal,.btn-wa{justify-content:center}
+  .photo-container{width:260px;height:360px}
+  .photo-frame-outer{width:240px;height:340px}
+  .photo-nameplate h3{font-size:.9rem}
+  .photo-nameplate p{font-size:.5rem}
+  .s-head{font-size:1.8rem}
+  .s-tag{font-size:.55rem}
+  .skill-box{padding:1.2rem}
+  .sk-title{font-size:.9rem}
+  .sk-desc{font-size:.75rem}
+  .stat-n{font-size:2rem}
+  .stat-l{font-size:.55rem}
+  .exp-points li{font-size:.75rem}
+  .work-card .wc-thumb{height:160px}
+  .wc-thumb-inner{font-size:2.5rem}
+  .wc-category{font-size:.5rem;padding:.2rem .5rem}
+  .wa-float{width:48px;height:48px;font-size:1.3rem;bottom:1rem;right:1rem}
+  .wa-float-label{right:55px;font-size:.6rem;padding:.3rem .6rem}
 }
 </style>
 </head>
