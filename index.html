@@ -549,7 +549,7 @@
     }
 
     /* ── CONTACT ── */
-    #contact{background:var(--navy);overflow:hidden;padding:8rem 5rem}
+    #contact{background:var(--navy);overflow:hidden}
     #contact::before{
       content:'"';
       position:absolute;
@@ -878,160 +878,237 @@
 
     /* ── MOBILE (max-width: 768px) ── */
     @media(max-width:768px){
+      /* Disable custom cursor on touch devices */
       body{cursor:auto}
       #c-dot,#c-ring{display:none!important}
-      #bg-canvas{display:none!important}
-      .bg-overlay{background:var(--ivory)}
-      .hero::before,.hero::after{display:none}
-      .wm{font-size:clamp(5rem,20vw,8rem);right:-8%;opacity:.1}
 
-      nav,nav.scrolled{padding:.7rem 1.2rem}
-      .n-logo{font-size:1.15rem}
+      /* Hide 3D background on mobile - too distracting */
+      #bg-canvas{opacity:0.08!important}
 
-      /* HERO MOBILE — photo top, text centered below */
-      .hero{padding:0 1.5rem!important;min-height:auto}
-      .hero-inner{grid-template-columns:1fr;min-height:auto;padding-top:0;gap:0}
+      /* Nav */
+      nav,nav.scrolled{padding:.8rem 1.2rem}
+      .n-logo{font-size:1.2rem}
 
-      .hero-right{
-        order:-1;height:auto;
-        padding:4.5rem 0 1.2rem;
-        display:flex;justify-content:center;
-      }
-      .photo-container{width:150px;height:200px;margin:0 auto}
-      .photo-frame-outer{width:140px;height:190px}
-      .photo-bg-box{top:6px;left:6px}
-      .photo-bg-box2{top:12px;left:12px}
-      .photo-main{box-shadow:0 15px 40px rgba(7,26,62,.15)}
-      .photo-nameplate{display:none}
-      .pc{width:10px;height:10px}
-      .royal-seal,.fbadge{display:none}
+      /* Hero - override base padding */
+      .hero{padding:0 1.2rem!important;min-height:auto}
+      .hero-left{padding:5rem 0 1.5rem}
 
-      .hero-left{padding:0 0 2rem;text-align:center}
-      .ornament{justify-content:center;gap:.4rem;margin-bottom:.5rem}
-      .orn-text{font-size:.46rem;letter-spacing:.14em}
+      /* Ornament - compact, no wrap */
+      .ornament{gap:.4rem;margin-bottom:1rem;flex-wrap:nowrap;justify-content:flex-start}
+      .orn-text{font-size:.5rem;letter-spacing:.14em}
       .orn-line{max-width:20px}
-      .orn-diamond{width:4px;height:4px}
+      .orn-diamond{width:5px;height:5px}
 
-      .hero-eyebrow{font-size:.76rem;margin-bottom:.2rem;text-align:center}
-      .hero-name{font-size:clamp(2.5rem,10vw,3.5rem);line-height:1;text-align:center}
-      .hero-name .first{display:inline}
-      .hero-name .last{display:inline;margin-left:0;-webkit-text-stroke:1.5px var(--gold)}
+      /* Hero name - fix .V alignment */
+      .hero-name{font-size:clamp(3rem,13vw,4.5rem)}
+      .hero-name .last{
+        margin-left:0;
+        -webkit-text-stroke:1.5px var(--gold);
+        font-size:.85em;
+      }
+      .hero-eyebrow{font-size:.85rem}
 
-      .hero-title-line{justify-content:center;flex-wrap:wrap;gap:.3rem;margin:.5rem 0}
-      .hero-title{white-space:normal;font-size:.54rem;letter-spacing:.1em;text-align:center}
+      /* Hero title line */
+      .hero-title-line{flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+      .hero-title{white-space:normal;font-size:.6rem;letter-spacing:.12em}
       .title-line{display:none}
 
-      .typed-royal{font-size:.92rem;min-height:1.4rem;margin-bottom:.5rem;text-align:center}
-      .hero-desc{font-size:.8rem;line-height:1.65;margin:0 auto 1rem;text-align:center;max-width:380px}
+      /* Typed text */
+      .typed-royal{font-size:1.05rem;min-height:2rem;margin-bottom:1rem}
 
-      .hero-actions{
-        flex-direction:column;align-items:stretch;gap:.5rem;
-        margin:0 auto 1.2rem;max-width:300px;
-      }
-      .btn-royal,.btn-wa{padding:.65rem 1rem;font-size:.66rem;justify-content:center;text-align:center}
+      /* Hero description */
+      .hero-desc{font-size:.85rem;line-height:1.75;margin-bottom:1.5rem}
 
+      /* Hero stats */
       .hero-stats{
-        gap:.5rem;display:grid;grid-template-columns:repeat(4,1fr);
-        padding-top:1rem;text-align:center;
+        gap:1.2rem;
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        padding-top:1.5rem;
       }
-      .hstat-num{font-size:1.5rem}
-      .hstat-label{font-size:.42rem;letter-spacing:.06em}
+      .hstat-num{font-size:2rem}
+      .hstat-label{font-size:.58rem}
 
-      /* SECTIONS */
-      .m-item{font-size:.55rem;padding:0 1rem;letter-spacing:.12em}
-      section{padding:3rem 1.2rem}
-      .s-head{font-size:clamp(1.6rem,5.5vw,2.2rem)}
-      .s-tag{font-size:.54rem;letter-spacing:.16em}
-      .s-rule{margin-bottom:1.8rem}
+      /* Hero buttons */
+      .hero-actions{
+        flex-direction:column;
+        align-items:stretch;
+        gap:.8rem;
+        margin-bottom:2rem;
+      }
+      .btn-royal,.btn-wa{
+        padding:.75rem 1.5rem;
+        font-size:.72rem;
+        justify-content:center;
+        text-align:center;
+      }
 
+      /* Photo */
+      .hero-right{padding:.5rem 0 3rem}
+      .photo-container{width:260px;height:360px}
+      .photo-frame-outer{width:240px;height:340px}
+      .photo-bg-box{top:10px;left:10px}
+      .photo-bg-box2{top:20px;left:20px}
+      .photo-nameplate{padding:1.5rem 1rem .7rem}
+      .photo-nameplate h3{font-size:.95rem}
+      .photo-nameplate p{font-size:.52rem}
+      .pc{width:16px;height:16px}
+
+      /* Marquee */
+      .m-item{font-size:.58rem;padding:0 1.2rem;letter-spacing:.15em}
+
+      /* Section headings */
+      section{padding:4rem 1.2rem}
+      .s-head{font-size:clamp(1.8rem,6vw,2.5rem)}
+      .s-tag{font-size:.58rem;letter-spacing:.18em}
+      .s-rule{margin-bottom:2.5rem}
+
+      /* Skills single col */
       .skills-layout{grid-template-columns:1fr;gap:0}
-      .skills-layout .skill-box{border-right:1px solid var(--border)!important;border-bottom:none}
+      .skills-layout .skill-box{
+        border-right:1px solid var(--border)!important;
+        border-bottom:none;
+      }
       .skills-layout .skill-box:last-child{border-bottom:1px solid var(--border)}
-      .skill-box{padding:1.3rem 1.2rem}
-      .sk-num{font-size:1.8rem;margin-bottom:.4rem}
-      .sk-title{font-size:.88rem}
-      .sk-desc{font-size:.75rem;line-height:1.6}
+      .skill-box{padding:1.5rem 1.2rem}
+      .sk-num{font-size:2rem;margin-bottom:.5rem}
+      .sk-title{font-size:.92rem}
+      .sk-desc{font-size:.78rem;line-height:1.65}
 
-      .stats-strip{padding:2rem 1.2rem}
+      /* Stats 2-col */
+      .stats-strip{padding:2.5rem 1.2rem}
       .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .stat-box{padding:1.3rem .8rem}
+      .stat-box{padding:1.5rem 1rem}
       .stat-box:nth-child(2n){border-right:none}
       .stat-box:nth-child(3){border-right:1px solid rgba(255,255,255,.07)}
       .stat-box:nth-child(n+3){border-top:1px solid rgba(255,255,255,.07)}
-      .stat-n{font-size:2.2rem}
-      .stat-l{font-size:.52rem;letter-spacing:.1em}
+      .stat-n{font-size:2.5rem}
+      .stat-l{font-size:.58rem;letter-spacing:.12em}
 
-      .exp-entry{padding:1.3rem 1.2rem}
-      .exp-year{font-size:2rem;right:.8rem;top:.6rem}
-      .exp-role{font-size:1.1rem}
-      .exp-company{font-size:.85rem}
-      .exp-loc{font-size:.58rem}
-      .exp-points li{font-size:.74rem;line-height:1.6}
+      /* Experience */
+      .exp-entry{padding:1.5rem 1.2rem}
+      .exp-year{font-size:2.2rem;right:1rem;top:.8rem}
+      .exp-role{font-size:1.2rem}
+      .exp-company{font-size:.9rem}
+      .exp-loc{font-size:.62rem}
+      .exp-points li{font-size:.78rem;line-height:1.65}
 
-      .work-grid{grid-template-columns:1fr;gap:.8rem}
+      /* Work */
+      .work-grid{grid-template-columns:1fr;gap:1rem}
       .work-card.featured{grid-column:span 1}
-      .work-card.featured .wc-thumb{height:160px}
-      .work-filter{gap:.3rem;margin-bottom:1.5rem}
-      .wf-btn{padding:.3rem .7rem;font-size:.56rem;letter-spacing:.08em}
-      .work-card .wc-body{padding:1rem}
-      .work-card .wc-thumb{height:150px}
-      .wc-title{font-size:.92rem}
-      .wc-desc{font-size:.72rem;line-height:1.55}
-      .wc-tag{font-size:.48rem;padding:.14rem .38rem}
-      .wc-result{font-size:.6rem}
+      .work-card.featured .wc-thumb{height:180px}
+      .work-filter{gap:.4rem;margin-bottom:2rem}
+      .wf-btn{padding:.35rem .8rem;font-size:.6rem;letter-spacing:.1em}
+      .work-card .wc-body{padding:1.2rem}
+      .work-card .wc-thumb{height:170px}
+      .wc-title{font-size:1rem}
+      .wc-desc{font-size:.76rem;line-height:1.6}
+      .wc-tag{font-size:.52rem;padding:.18rem .45rem}
+      .wc-result{font-size:.65rem}
 
-      #contact{padding:3rem 1.2rem!important}
-      .contact-lede{font-size:.84rem;line-height:1.65;margin-bottom:1.2rem}
-      .c-detail{gap:.7rem;padding:.7rem 0;flex-wrap:nowrap}
-      .c-icon{width:34px;height:34px;font-size:.8rem;min-width:34px}
-      .c-val{font-size:.78rem}
-      .c-label{font-size:.5rem}
-      .wa-direct-btn{padding:.7rem .9rem;gap:.5rem}
-      .wa-d-icon{width:34px;height:34px;min-width:34px;font-size:.88rem}
-      .wa-d-text .wa-d-val{font-size:.76rem}
-      .wa-d-text .wa-d-label{font-size:.48rem}
+      /* Contact - override inline padding */
+      #contact{padding:4rem 1.2rem!important}
+      .contact-lede{font-size:.88rem;line-height:1.7;margin-bottom:2rem}
+      .c-detail{gap:.8rem;padding:1rem 0;flex-wrap:nowrap}
+      .c-icon{width:36px;height:36px;font-size:.85rem;min-width:36px}
+      .c-val{font-size:.82rem}
+      .c-label{font-size:.55rem}
+      .wa-direct-btn{padding:.8rem 1rem;gap:.6rem}
+      .wa-d-icon{width:36px;height:36px;min-width:36px;font-size:.95rem}
+      .wa-d-text .wa-d-val{font-size:.8rem}
+      .wa-d-text .wa-d-label{font-size:.52rem}
 
-      footer{padding:1rem;gap:.5rem}
-      .f-logo{font-size:.95rem}
-      .f-copy{font-size:.55rem}
-      .f-link{width:28px;height:28px;font-size:.6rem}
+      /* Footer */
+      footer{padding:1.2rem;gap:.6rem}
+      .f-logo{font-size:1rem}
+      .f-copy{font-size:.6rem}
+      .f-link{width:30px;height:30px;font-size:.62rem}
 
-      .wa-float{width:48px;height:48px;font-size:1.2rem;bottom:1rem;right:1rem}
+      /* WhatsApp float */
+      .wa-float{width:50px;height:50px;font-size:1.3rem;bottom:1.2rem;right:1.2rem}
       .wa-float-label{display:none}
-      #skills::before{font-size:4rem}
-      #work::before{font-size:4rem}
-      #contact::before{font-size:10rem}
+
+      /* Watermark - reduce */
+      .wm{font-size:clamp(8rem,30vw,14rem);right:-10%;opacity:.5}
+      #skills::before{font-size:5rem}
+      #work::before{font-size:5rem}
+      #contact::before{font-size:14rem}
+
+      /* Hero decorative lines - hide on mobile */
+      .hero::before,.hero::after{display:none}
+
+      /* Stronger overlay for readability */
+      .bg-overlay{background:rgba(246,248,252,0.85)}
     }
 
     /* ── SMALL MOBILE (max-width: 480px) ── */
     @media(max-width:480px){
+      /* Nav */
       nav,nav.scrolled{padding:.7rem 1rem}
       .n-logo{font-size:1.1rem}
 
+      /* Hero */
       .hero{padding:0 1rem!important}
-      .hero-left{padding:3.8rem 0 .8rem}
+      .hero-left{padding:4.5rem 0 1rem}
 
-      .hero-name{font-size:clamp(2.3rem,10vw,3rem)}
-      .hero-eyebrow{font-size:.75rem;margin-bottom:.2rem}
+      /* 3D even more hidden */
+      #bg-canvas{opacity:0.05!important}
 
-      .hero-title{font-size:.5rem;letter-spacing:.1em}
-      .typed-royal{font-size:.88rem;min-height:1.5rem;margin-bottom:.6rem}
-      .hero-desc{font-size:.78rem;line-height:1.65;margin-bottom:1rem}
+      /* Name - fix alignment */
+      .hero-name{font-size:clamp(2.5rem,11vw,3.2rem)}
+      .hero-name .last{
+        margin-left:0;
+        -webkit-text-stroke:1.5px var(--gold);
+        font-size:.85em;
+      }
+      .hero-eyebrow{font-size:.78rem}
 
-      .hero-stats{gap:.8rem}
-      .hstat-num{font-size:1.6rem}
-      .hstat-label{font-size:.5rem;letter-spacing:.1em}
+      /* Ornament compact */
+      .ornament{gap:.3rem;margin-bottom:.8rem}
+      .orn-text{font-size:.45rem;letter-spacing:.12em}
+      .orn-diamond{width:4px;height:4px}
+      .orn-line{max-width:15px}
 
-      .hero-actions{gap:.5rem;margin-bottom:1.2rem}
-      .btn-royal,.btn-wa{padding:.6rem 1rem;font-size:.63rem;letter-spacing:.08em}
+      /* Title & typed */
+      .hero-title{font-size:.52rem;letter-spacing:.1em}
+      .typed-royal{font-size:.9rem;min-height:1.8rem}
+
+      /* Description */
+      .hero-desc{font-size:.8rem;line-height:1.7;margin-bottom:1.2rem}
+
+      /* Stats grid */
+      .hero-stats{gap:1rem;grid-template-columns:repeat(2,1fr)}
+      .hstat-num{font-size:1.8rem}
+      .hstat-label{font-size:.52rem;letter-spacing:.1em}
+
+      /* Buttons */
+      .hero-actions{gap:.6rem;margin-bottom:1.5rem}
+      .btn-royal,.btn-wa{
+        padding:.65rem 1rem;
+        font-size:.65rem;
+        letter-spacing:.08em;
+      }
       .wa-icon{font-size:.85rem}
 
+      /* Photo */
+      .hero-right{padding:.5rem 0 2.5rem}
+      .photo-container{width:220px;height:310px}
+      .photo-frame-outer{width:200px;height:290px}
+      .photo-bg-box{top:8px;left:8px}
+      .photo-bg-box2{top:16px;left:16px}
+      .pc{width:14px;height:14px;border-width:1.5px!important}
+      .photo-nameplate h3{font-size:.82rem}
+      .photo-nameplate p{font-size:.45rem;letter-spacing:.12em}
+      .photo-nameplate{padding:1.2rem .8rem .6rem}
+
+      /* Sections */
       section{padding:3rem 1rem}
       .s-head{font-size:clamp(1.5rem,5.5vw,2rem)}
       .s-tag{font-size:.52rem;letter-spacing:.15em;gap:.4rem}
       .s-tag::before{width:20px}
-      .s-rule{margin-bottom:1.5rem;gap:.6rem}
+      .s-rule{margin-bottom:2rem;gap:.6rem}
 
+      /* Skills */
       .skill-box{padding:1.2rem 1rem}
       .sk-num{font-size:1.8rem;margin-bottom:.4rem}
       .sk-icon{font-size:1.2rem;margin-bottom:.5rem}
@@ -1039,11 +1116,13 @@
       .sk-desc{font-size:.73rem;line-height:1.6;margin-bottom:.7rem}
       .pill{font-size:.52rem;padding:.15rem .45rem}
 
+      /* Stats */
       .stats-strip{padding:2rem 1rem}
       .stat-box{padding:1.2rem .8rem}
       .stat-n{font-size:2rem}
       .stat-l{font-size:.5rem;letter-spacing:.1em}
 
+      /* Experience */
       .exp-entry{padding:1.2rem 1rem}
       .exp-year{font-size:1.8rem;right:.8rem;top:.6rem}
       .exp-badge{font-size:.52rem;padding:.2rem .5rem;letter-spacing:.12em}
@@ -1054,6 +1133,7 @@
       .exp-points li{font-size:.73rem;line-height:1.6;padding-left:1rem;margin-bottom:.4rem}
       .exp-points li::before{font-size:.35rem;top:.48rem}
 
+      /* Work cards */
       .work-card .wc-thumb{height:150px}
       .wc-thumb-inner{font-size:2.5rem}
       .wc-category{font-size:.5rem;padding:.2rem .5rem;top:8px;left:8px;letter-spacing:.12em}
@@ -1068,9 +1148,10 @@
       .work-filter{gap:.3rem;margin-bottom:1.5rem}
       .wf-btn{padding:.3rem .6rem;font-size:.55rem;letter-spacing:.08em}
 
+      /* Contact */
       #contact{padding:3rem 1rem!important}
       .contact-lede{font-size:.82rem;line-height:1.65;margin-bottom:1.5rem}
-      .c-detail{gap:.6rem;padding:.7rem 0}
+      .c-detail{gap:.6rem;padding:.8rem 0}
       .c-icon{width:32px;height:32px;min-width:32px;font-size:.75rem}
       .c-val{font-size:.78rem}
       .c-label{font-size:.5rem;letter-spacing:.1em}
@@ -1078,32 +1159,41 @@
       .wa-d-icon{width:32px;height:32px;min-width:32px;font-size:.85rem}
       .wa-d-text .wa-d-val{font-size:.72rem}
       .wa-d-text .wa-d-label{font-size:.48rem}
+      .wa-d-arrow{font-size:.75rem}
 
+      /* Footer */
       footer{padding:1rem;gap:.5rem}
       .f-logo{font-size:.95rem}
       .f-copy{font-size:.52rem;letter-spacing:.04em}
+      .f-links{gap:.8rem}
       .f-link{width:28px;height:28px;font-size:.6rem}
 
+      /* WhatsApp float */
       .wa-float{width:46px;height:46px;font-size:1.2rem;bottom:1rem;right:1rem}
 
-      .wm{font-size:clamp(5rem,22vw,9rem)}
-      #skills::before{font-size:3.5rem}
-      #work::before{font-size:4rem}
-      #contact::before{font-size:10rem;top:-3rem;left:-2rem}
+      /* Background watermarks */
+      .wm{font-size:clamp(6rem,28vw,12rem)}
+      #skills::before{font-size:4rem}
+      #work::before{font-size:5rem}
+      #contact::before{font-size:12rem;top:-3rem;left:-2rem}
     }
 
     /* ── VERY SMALL MOBILE (max-width: 360px) ── */
     @media(max-width:360px){
       .hero{padding:0 .75rem!important}
-      .hero-left{padding:3.5rem 0 .6rem}
+      .hero-left{padding:4rem 0 .8rem}
       .hero-name{font-size:2rem}
-      .hero-eyebrow{font-size:.7rem}
-      .typed-royal{font-size:.78rem;min-height:1.4rem}
-      .hero-desc{font-size:.73rem}
-      .hero-stats{gap:.6rem}
-      .hstat-num{font-size:1.4rem}
-      .hstat-label{font-size:.45rem}
-      .btn-royal,.btn-wa{padding:.5rem .8rem;font-size:.58rem}
+      .hero-name .last{margin-left:0}
+      .hero-eyebrow{font-size:.72rem}
+      .ornament{display:none}
+      .typed-royal{font-size:.82rem;min-height:1.8rem}
+      .hero-desc{font-size:.75rem}
+      .hero-stats{grid-template-columns:repeat(2,1fr);gap:.8rem}
+      .hstat-num{font-size:1.5rem}
+      .hstat-label{font-size:.48rem}
+      .btn-royal,.btn-wa{padding:.55rem .8rem;font-size:.6rem}
+      .photo-container{width:190px;height:270px}
+      .photo-frame-outer{width:175px;height:255px}
       section{padding:2.5rem .75rem}
       .stats-strip{padding:1.5rem .75rem}
       footer{padding:.8rem .75rem}
