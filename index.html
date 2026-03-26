@@ -880,32 +880,41 @@
     @media(max-width:768px){
       /* Disable custom cursor on touch devices */
       body{cursor:auto}
-      #c-dot,#c-ring{display:none}
+      #c-dot,#c-ring{display:none!important}
+
+      /* Hide 3D background on mobile - too distracting */
+      #bg-canvas{opacity:0.08!important}
 
       /* Nav */
       nav,nav.scrolled{padding:.8rem 1.2rem}
       .n-logo{font-size:1.2rem}
 
-      /* Hero */
-      .hero{padding:0 1.2rem;min-height:auto}
+      /* Hero - override base padding */
+      .hero{padding:0 1.2rem!important;min-height:auto}
       .hero-left{padding:5rem 0 1.5rem}
 
-      /* Ornament */
-      .ornament{gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap;justify-content:flex-start}
-      .orn-text{font-size:.58rem;letter-spacing:.18em}
-      .orn-line{max-width:30px}
+      /* Ornament - compact, no wrap */
+      .ornament{gap:.4rem;margin-bottom:1rem;flex-wrap:nowrap;justify-content:flex-start}
+      .orn-text{font-size:.5rem;letter-spacing:.14em}
+      .orn-line{max-width:20px}
+      .orn-diamond{width:5px;height:5px}
 
-      /* Hero name */
-      .hero-name{font-size:clamp(2.8rem,12vw,4rem)}
-      .hero-name .last{margin-left:.5rem}
+      /* Hero name - fix .V alignment */
+      .hero-name{font-size:clamp(3rem,13vw,4.5rem)}
+      .hero-name .last{
+        margin-left:0;
+        -webkit-text-stroke:1.5px var(--gold);
+        font-size:.85em;
+      }
       .hero-eyebrow{font-size:.85rem}
 
       /* Hero title line */
       .hero-title-line{flex-wrap:wrap;gap:.5rem;margin:1rem 0}
-      .hero-title{white-space:normal;font-size:.62rem;letter-spacing:.15em}
+      .hero-title{white-space:normal;font-size:.6rem;letter-spacing:.12em}
+      .title-line{display:none}
 
       /* Typed text */
-      .typed-royal{font-size:1.05rem;min-height:2.5rem;margin-bottom:1rem}
+      .typed-royal{font-size:1.05rem;min-height:2rem;margin-bottom:1rem}
 
       /* Hero description */
       .hero-desc{font-size:.85rem;line-height:1.75;margin-bottom:1.5rem}
@@ -997,8 +1006,8 @@
       .wc-tag{font-size:.52rem;padding:.18rem .45rem}
       .wc-result{font-size:.65rem}
 
-      /* Contact */
-      #contact{padding:4rem 1.2rem}
+      /* Contact - override inline padding */
+      #contact{padding:4rem 1.2rem!important}
       .contact-lede{font-size:.88rem;line-height:1.7;margin-bottom:2rem}
       .c-detail{gap:.8rem;padding:1rem 0;flex-wrap:nowrap}
       .c-icon{width:36px;height:36px;font-size:.85rem;min-width:36px}
@@ -1019,11 +1028,17 @@
       .wa-float{width:50px;height:50px;font-size:1.3rem;bottom:1.2rem;right:1.2rem}
       .wa-float-label{display:none}
 
-      /* Watermark */
-      .wm{font-size:clamp(10rem,40vw,18rem);right:-10%}
-      #skills::before{font-size:6rem}
-      #work::before{font-size:7rem}
-      #contact::before{font-size:18rem}
+      /* Watermark - reduce */
+      .wm{font-size:clamp(8rem,30vw,14rem);right:-10%;opacity:.5}
+      #skills::before{font-size:5rem}
+      #work::before{font-size:5rem}
+      #contact::before{font-size:14rem}
+
+      /* Hero decorative lines - hide on mobile */
+      .hero::before,.hero::after{display:none}
+
+      /* Stronger overlay for readability */
+      .bg-overlay{background:rgba(246,248,252,0.85)}
     }
 
     /* ── SMALL MOBILE (max-width: 480px) ── */
@@ -1033,23 +1048,30 @@
       .n-logo{font-size:1.1rem}
 
       /* Hero */
-      .hero{padding:0 1rem}
+      .hero{padding:0 1rem!important}
       .hero-left{padding:4.5rem 0 1rem}
 
-      /* Name */
-      .hero-name{font-size:clamp(2.2rem,11vw,3rem)}
-      .hero-name .last{margin-left:.3rem;-webkit-text-stroke:1.5px var(--gold)}
+      /* 3D even more hidden */
+      #bg-canvas{opacity:0.05!important}
+
+      /* Name - fix alignment */
+      .hero-name{font-size:clamp(2.5rem,11vw,3.2rem)}
+      .hero-name .last{
+        margin-left:0;
+        -webkit-text-stroke:1.5px var(--gold);
+        font-size:.85em;
+      }
       .hero-eyebrow{font-size:.78rem}
 
       /* Ornament compact */
-      .ornament{gap:.4rem;margin-bottom:1rem}
-      .orn-text{font-size:.5rem;letter-spacing:.15em}
-      .orn-diamond{width:5px;height:5px}
-      .orn-line{max-width:20px}
+      .ornament{gap:.3rem;margin-bottom:.8rem}
+      .orn-text{font-size:.45rem;letter-spacing:.12em}
+      .orn-diamond{width:4px;height:4px}
+      .orn-line{max-width:15px}
 
       /* Title & typed */
-      .hero-title{font-size:.55rem;letter-spacing:.12em}
-      .typed-royal{font-size:.9rem;min-height:2rem}
+      .hero-title{font-size:.52rem;letter-spacing:.1em}
+      .typed-royal{font-size:.9rem;min-height:1.8rem}
 
       /* Description */
       .hero-desc{font-size:.8rem;line-height:1.7;margin-bottom:1.2rem}
@@ -1127,7 +1149,7 @@
       .wf-btn{padding:.3rem .6rem;font-size:.55rem;letter-spacing:.08em}
 
       /* Contact */
-      #contact{padding:3rem 1rem}
+      #contact{padding:3rem 1rem!important}
       .contact-lede{font-size:.82rem;line-height:1.65;margin-bottom:1.5rem}
       .c-detail{gap:.6rem;padding:.8rem 0}
       .c-icon{width:32px;height:32px;min-width:32px;font-size:.75rem}
@@ -1150,7 +1172,7 @@
       .wa-float{width:46px;height:46px;font-size:1.2rem;bottom:1rem;right:1rem}
 
       /* Background watermarks */
-      .wm{font-size:clamp(8rem,35vw,14rem)}
+      .wm{font-size:clamp(6rem,28vw,12rem)}
       #skills::before{font-size:4rem}
       #work::before{font-size:5rem}
       #contact::before{font-size:12rem;top:-3rem;left:-2rem}
@@ -1158,10 +1180,10 @@
 
     /* ── VERY SMALL MOBILE (max-width: 360px) ── */
     @media(max-width:360px){
-      .hero{padding:0 .75rem}
+      .hero{padding:0 .75rem!important}
       .hero-left{padding:4rem 0 .8rem}
       .hero-name{font-size:2rem}
-      .hero-name .last{margin-left:.2rem}
+      .hero-name .last{margin-left:0}
       .hero-eyebrow{font-size:.72rem}
       .ornament{display:none}
       .typed-royal{font-size:.82rem;min-height:1.8rem}
@@ -1175,7 +1197,7 @@
       section{padding:2.5rem .75rem}
       .stats-strip{padding:1.5rem .75rem}
       footer{padding:.8rem .75rem}
-      #contact{padding:2.5rem .75rem}
+      #contact{padding:2.5rem .75rem!important}
       .s-head{font-size:1.4rem}
       .exp-role{font-size:.95rem}
       .stat-n{font-size:1.6rem}
@@ -1222,7 +1244,7 @@
     </div>
 
     <!-- ══ HERO ══ -->
-    <section class="hero" id="about" style="padding:0 5rem">
+    <section class="hero" id="about">
       <div class="wm">V</div>
       <div class="hero-inner">
 
@@ -1805,7 +1827,7 @@
     </section>
 
     <!-- ══ CONTACT ══ -->
-    <section id="contact" style="padding:8rem 5rem">
+    <section id="contact">
       <div class="contact-layout">
         <div class="c-left rv">
           <div class="s-tag">Let's Connect</div>
