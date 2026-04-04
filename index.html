@@ -1,2037 +1,945 @@
+Here is the updated HTML document with all references to "Michael Infotech" removed and the current role updated to reflect work at "Bumble Soft IT Solutions".
+```html
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"/>
-    <title>Sethu.V — Digital Architect & Brand Strategist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Cormorant+Upright:wght@300;400;500&family=Jost:wght@200;300;400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
-    <!-- Three.js for 3D background -->
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-        }
-      }
-    </script>
-    <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --ivory:#F6F8FC;
-      --ivory2:#EDF1F9;
-      --ivory3:#DDE4F2;
-      --navy:#071A3E;
-      --navy2:#0E2660;
-      --navy3:#1A3A80;
-      --gold:#1A4FA8;
-      --gold2:#4A8FE8;
-      --gold3:#80B4F4;
-      --gold-pale:#D0E4FC;
-      --crimson:#E8C040;
-      --text:#071A3E;
-      --text2:#2A3F6A;
-      --text3:#6A82AA;
-      --border:rgba(26,79,168,.2);
-      --wa:#25D366;
-      --wa-dark:#128C7E;
-      --wa-light:#DCF8C6;
-    }
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Jost',sans-serif;
-      background:var(--ivory);
-      color:var(--text);
-      overflow-x:hidden;
-      cursor:none;
-      position:relative;
-    }
-
-    /* 3D Canvas Background */
-    #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      pointer-events: none;
-      opacity: 0.35;
-    }
-    /* Overlay for readability */
-    .bg-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 30% 40%, rgba(246,248,252,0.2), rgba(237,241,249,0.5));
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* ── CURSOR ── */
-    #c-dot,#c-ring{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-    #c-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;transition:transform .1s}
-    #c-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;transition:width .3s,height .3s,opacity .3s,transform .4s cubic-bezier(.23,1,.32,1);opacity:.7}
-    #c-ring.big{width:60px;height:60px;opacity:.35}
-
-    /* ── PROGRESS ── */
-    #pbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#071A3E,#1A4FA8,#80B4F4);z-index:1000;width:0%;transition:width .15s}
-
-    /* ── NAV ── */
-    nav{
-      position:fixed;top:0;width:100%;z-index:500;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:1.4rem 5rem;
-      transition:all .5s cubic-bezier(.23,1,.32,1);
-    }
-    nav.scrolled{
-      background:rgba(253,250,243,.94);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      padding:1rem 5rem;
-      box-shadow:0 4px 40px rgba(184,146,42,.08);
-    }
-    .n-logo{
-      font-family:'Playfair Display',serif;
-      font-size:1.4rem;font-weight:700;
-      color:var(--navy);letter-spacing:.05em;
-    }
-    .n-logo span{color:var(--gold)}
-    .n-links{display:flex;gap:2.5rem;list-style:none}
-    .n-links a{
-      font-size:.7rem;font-weight:500;
-      letter-spacing:.2em;text-transform:uppercase;
-      color:var(--text2);text-decoration:none;
-      transition:color .3s;position:relative;
-    }
-    .n-links a::after{
-      content:'';position:absolute;bottom:-4px;left:0;
-      width:0;height:1px;background:var(--gold);
-      transition:width .4s cubic-bezier(.23,1,.32,1);
-    }
-    .n-links a:hover{color:var(--gold)}
-    .n-links a:hover::after{width:100%}
-    .n-burger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:none;padding:4px}
-    .n-burger span{display:block;width:22px;height:1.5px;background:var(--navy);transition:all .3s}
-
-    /* ── HERO ── */
-    .hero{
-      min-height:100vh;position:relative;
-      display:flex;align-items:center;
-      padding:0 5rem;overflow:hidden;
-    }
-    /* BIG WATERMARK */
-    .wm{
-      position:absolute;
-      font-family:'Playfair Display',serif;
-      font-size:clamp(18rem,35vw,42rem);
-      font-weight:900;font-style:italic;
-      color:transparent;
-      -webkit-text-stroke:1px rgba(184,146,42,.08);
-      right:-5%;bottom:-5%;
-      line-height:1;user-select:none;pointer-events:none;
-      z-index:0;
-    }
-    /* DIAGONAL STRIPE */
-    .hero::before{
-      content:'';position:absolute;
-      top:0;right:20%;width:1px;height:100%;
-      background:linear-gradient(to bottom,transparent,var(--border),transparent);
-    }
-    .hero::after{
-      content:'';position:absolute;
-      top:50%;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,var(--border),transparent);
-    }
-    .hero-inner{
-      position:relative;z-index:2;
-      max-width:1400px;width:100%;
-      display:grid;grid-template-columns:1fr 420px;
-      gap:0;align-items:center;min-height:100vh;
-    }
-    .hero-left{padding:7rem 0 5rem}
-
-    /* ORNAMENT */
-    .ornament{
-      display:flex;align-items:center;gap:.8rem;
-      margin-bottom:1.8rem;
-    }
-    .orn-line{flex:1;max-width:60px;height:1px;background:var(--gold)}
-    .orn-text{
-      font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;
-      color:var(--gold);font-weight:600;font-family:'Jost',sans-serif;
-    }
-    .orn-diamond{
-      width:8px;height:8px;background:var(--gold);
-      transform:rotate(45deg);flex-shrink:0;
-    }
-
-    .hero-eyebrow{
-      font-family:'IM Fell English',serif;
-      font-style:italic;font-size:1rem;
-      color:var(--text3);margin-bottom:.5rem;
-      letter-spacing:.05em;
-    }
-    .hero-name{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(4rem,8vw,8.5rem);
-      font-weight:900;line-height:.9;
-      color:var(--navy);
-    }
-    .hero-name .first{display:block}
-    .hero-name .last{
-      display:block;color:transparent;
-      -webkit-text-stroke:2px var(--gold);
-      margin-left:2rem;
-    }
-    .hero-title-line{
-      display:flex;align-items:center;gap:1rem;
-      margin:1.5rem 0;
-    }
-    .title-line{flex:1;height:1px;background:linear-gradient(90deg,var(--navy),transparent)}
-    .hero-title{
-      font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-      color:var(--text2);font-weight:500;white-space:nowrap;
-    }
-    .typed-royal{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(1.2rem,2.5vw,2rem);
-      color:var(--navy2);font-style:italic;
-      margin-bottom:1.5rem;min-height:3rem;
-      line-height:1.3;
-    }
-    .tcursor{color:var(--gold);animation:blink .7s infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-    .hero-desc{
-      font-size:.93rem;color:var(--text2);line-height:1.9;
-      max-width:520px;margin-bottom:2.5rem;
-      font-weight:300;
-    }
-    .hero-desc strong{color:var(--navy);font-weight:600}
-
-    .hero-actions{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;flex-wrap:wrap}
-    .btn-royal{
-      display:inline-flex;align-items:center;gap:.6rem;
-      background:var(--navy);color:var(--ivory);
-      padding:.85rem 2.2rem;font-size:.78rem;
-      letter-spacing:.15em;text-transform:uppercase;
-      text-decoration:none;font-weight:600;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-      position:relative;overflow:hidden;
-    }
-    .btn-royal::before{
-      content:'';position:absolute;inset:0;
-      background:var(--gold);transform:translateX(-101%);
-      transition:transform .4s cubic-bezier(.23,1,.32,1);
-    }
-    .btn-royal:hover{color:var(--navy);box-shadow:5px 5px 0 var(--gold)}
-    .btn-royal:hover::before{transform:translateX(0)}
-    .btn-royal span{position:relative;z-index:1}
-    .btn-ghost{
-      display:inline-flex;align-items:center;gap:.5rem;
-      color:var(--navy);font-size:.78rem;
-      letter-spacing:.12em;text-transform:uppercase;
-      text-decoration:none;font-weight:600;
-      border-bottom:1.5px solid var(--navy);
-      padding-bottom:2px;transition:all .3s;
-    }
-    .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
-
-    .hero-stats{
-      display:flex;gap:2.5rem;flex-wrap:wrap;
-      border-top:1px solid var(--border);
-      padding-top:2rem;
-    }
-    .hstat-num{
-      font-family:'Playfair Display',serif;
-      font-size:2.5rem;font-weight:700;color:var(--navy);
-      line-height:1;display:block;
-    }
-    .hstat-label{
-      font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--text3);margin-top:.3rem;display:block;
-    }
-
-    /* HERO RIGHT — PHOTO */
-    .hero-right{
-      position:relative;height:100vh;
-      display:flex;align-items:center;justify-content:center;
-      padding-top:5rem;
-    }
-    .photo-container{
-      position:relative;
-      display:flex;align-items:center;justify-content:center;
-      width:420px;height:560px;
-    }
-    /* layered accent blocks */
-    .photo-frame-outer{
-      position:absolute;
-      width:360px;height:520px;
-    }
-    .photo-bg-box{
-      position:absolute;
-      width:100%;height:100%;
-      background:var(--gold-pale);
-      border:1.5px solid var(--gold2);
-      top:14px;left:14px;
-      z-index:0;
-    }
-    .photo-bg-box2{
-      position:absolute;
-      width:100%;height:100%;
-      background:transparent;
-      border:1px solid rgba(26,79,168,.15);
-      top:28px;left:28px;
-      z-index:0;
-    }
-    /* main photo */
-    .photo-main{
-      position:relative;z-index:2;
-      width:100%;height:100%;
-      overflow:hidden;
-      box-shadow:0 50px 120px rgba(7,26,62,.2),0 10px 40px rgba(7,26,62,.12);
-    }
-    .photo-main img{
-      width:100%;height:100%;
-      object-fit:cover;object-position:center top;
-      display:block;
-      transition:transform .8s cubic-bezier(.23,1,.32,1);
-    }
-    .photo-main:hover img{transform:scale(1.04)}
-
-    /* dark name strip at bottom */
-    .photo-nameplate{
-      position:absolute;
-      bottom:0;left:0;right:0;
-      background:linear-gradient(to top,rgba(7,26,62,.95),rgba(7,26,62,.6),transparent);
-      padding:2rem 1.4rem .9rem;
-      z-index:3;
-    }
-    .photo-nameplate h3{
-      font-family:'Playfair Display',serif;
-      font-size:1.1rem;font-weight:700;color:white;letter-spacing:.04em;margin-bottom:.15rem;
-    }
-    .photo-nameplate p{
-      font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);font-weight:600;
-    }
-
-    /* corner brackets */
-    .pc{position:absolute;z-index:4;width:22px;height:22px;border-color:var(--gold2);border-style:solid}
-    .pc.tl{top:10px;left:10px;border-width:2px 0 0 2px}
-    .pc.tr{top:10px;right:10px;border-width:2px 2px 0 0}
-    .pc.bl{bottom:10px;left:10px;border-width:0 0 2px 2px}
-    .pc.br{bottom:10px;right:10px;border-width:0 2px 2px 0}
-
-    /* floating badges */
-    .fbadge{
-      position:absolute;z-index:6;
-      background:white;
-      border-left:3px solid var(--gold2);
-      padding:.55rem 1rem;
-      box-shadow:0 8px 28px rgba(7,26,62,.14);
-      font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
-      color:var(--navy);font-weight:700;white-space:nowrap;
-      display:flex;align-items:center;gap:.5rem;
-    }
-    .fbadge .fb-dot{
-      width:6px;height:6px;border-radius:50%;background:var(--gold2);flex-shrink:0;
-      animation:dotpulse 2s infinite;
-    }
-    @keyframes dotpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
-    .fb1{top:12%;right:-20px;animation:fbFloat 4s ease-in-out infinite}
-    .fb2{top:48%;left:-30px;animation:fbFloat 5s ease-in-out infinite .8s}
-    .fb3{bottom:18%;right:-15px;animation:fbFloat 3.5s ease-in-out infinite 1.5s}
-
-    /* ── MARQUEE ── */
-    .marquee-band{
-      background:var(--navy);color:var(--ivory);
-      padding:.9rem 0;overflow:hidden;
-      position:relative;z-index:10;border-top:3px solid var(--crimson);
-    }
-    .marquee-track{
-      display:flex;gap:0;
-      animation:marqueeScroll 25s linear infinite;
-      width:max-content;
-    }
-    @keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    .m-item{
-      font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
-      font-weight:500;padding:0 2rem;white-space:nowrap;opacity:.8;
-    }
-    .m-sep{color:var(--gold);opacity:1!important;padding:0 .5rem}
-
-    /* ── SECTION BASE ── */
-    section{position:relative;padding:8rem 5rem;overflow:hidden}
-    .s-tag{
-      font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
-      color:var(--gold);font-weight:700;margin-bottom:.8rem;
-      display:flex;align-items:center;gap:.6rem;
-    }
-    .s-tag::before{content:'';width:30px;height:1px;background:var(--gold)}
-    .s-head{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(2.2rem,4.5vw,3.8rem);
-      font-weight:900;color:var(--navy);
-      line-height:1.05;margin-bottom:1rem;
-    }
-    .s-head em{
-      font-style:italic;color:var(--gold);
-    }
-    .s-rule{
-      display:flex;align-items:center;gap:1rem;
-      margin-bottom:3.5rem;
-    }
-    .s-rule-line{flex:1;max-width:80px;height:1px;background:var(--navy)}
-    .s-rule-diamond{
-      width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;
-    }
-    .s-rule-line2{width:40px;height:1px;background:var(--border)}
-    .container{max-width:1300px;margin:0 auto}
-
-    /* ── SKILLS ── */
-    #skills{background:var(--ivory2)}
-    #skills::before{
-      content:'EXPERTISE';
-      position:absolute;
-      font-family:'Playfair Display',serif;
-      font-size:12rem;font-weight:900;
-      color:transparent;
-      -webkit-text-stroke:1px rgba(8,16,43,.04);
-      top:50%;left:50%;transform:translate(-50%,-50%);
-      white-space:nowrap;pointer-events:none;user-select:none;
-    }
-
-    .skills-layout{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-    .skill-box{
-      padding:2rem 1.8rem;
-      border:1px solid var(--border);
-      border-right:none;border-bottom:none;
-      position:relative;overflow:hidden;
-      cursor:none;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-      background:var(--ivory);
-    }
-    .skills-layout .skill-box:nth-child(4n){border-right:1px solid var(--border)}
-    .skills-layout .skill-box:nth-child(n+5){border-bottom:1px solid var(--border)}
-    .skills-layout .skill-box:nth-last-child(-n+4):not(:nth-child(n+5)){border-bottom:1px solid var(--border)}
-    .skill-box::before{
-      content:'';position:absolute;
-      bottom:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--gold),var(--gold2));
-      transform:scaleX(0);transform-origin:left;
-      transition:transform .4s cubic-bezier(.23,1,.32,1);
-    }
-    .skill-box::after{
-      content:'';position:absolute;inset:0;
-      background:var(--navy);opacity:0;
-      transition:opacity .5s;
-    }
-    .skill-box:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(8,16,43,.12)}
-    .skill-box:hover::before{transform:scaleX(1)}
-    .skill-box:hover::after{opacity:.03}
-
-    .sk-num{
-      font-family:'Playfair Display',serif;
-      font-size:2.5rem;font-weight:900;
-      color:rgba(184,146,42,.12);
-      line-height:1;margin-bottom:.8rem;
-      transition:color .4s;
-    }
-    .skill-box:hover .sk-num{color:rgba(184,146,42,.2)}
-    .sk-icon{font-size:1.4rem;margin-bottom:.8rem;display:block}
-    .sk-title{
-      font-family:'Playfair Display',serif;
-      font-size:1rem;font-weight:700;color:var(--navy);
-      margin-bottom:.6rem;
-    }
-    .sk-desc{
-      font-size:.8rem;color:var(--text2);line-height:1.7;
-      margin-bottom:1rem;font-weight:300;
-    }
-    .sk-pills{display:flex;flex-wrap:wrap;gap:.3rem}
-    .pill{
-      font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
-      padding:.2rem .6rem;border:1px solid var(--border);
-      color:var(--text3);font-weight:500;
-      transition:all .3s;
-    }
-    .skill-box:hover .pill{border-color:var(--gold);color:var(--gold)}
-
-    /* ── STATS STRIP ── */
-    .stats-strip{
-      background:var(--navy);
-      padding:5rem;
-      position:relative;overflow:hidden;
-    }
-    .stats-strip::before{
-      content:'';position:absolute;
-      top:-100px;right:-100px;
-      width:400px;height:400px;border-radius:50%;
-      background:radial-gradient(circle,rgba(26,79,168,.15),transparent 70%);
-    }
-    .stats-grid{
-      max-width:1300px;margin:0 auto;
-      display:grid;grid-template-columns:repeat(5,1fr);
-      gap:0;
-    }
-    .stat-box{
-      padding:2rem;text-align:center;
-      border-right:1px solid rgba(255,255,255,.07);
-      position:relative;
-    }
-    .stat-box:last-child{border-right:none}
-    .stat-box::before{
-      content:'';position:absolute;
-      top:0;left:50%;transform:translateX(-50%);
-      width:40px;height:2px;
-      background:linear-gradient(90deg,transparent,var(--gold),transparent);
-    }
-    .stat-n{
-      font-family:'Playfair Display',serif;
-      font-size:3.5rem;font-weight:900;
-      color:white;line-height:1;display:block;
-    }
-    .stat-suffix{color:var(--gold)}
-    .stat-l{
-      font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
-      color:rgba(255,255,255,.4);margin-top:.5rem;display:block;
-    }
-
-    /* ── EXPERIENCE ── */
-    #experience{background:var(--ivory)}
-    .exp-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
-    .exp-entry{
-      padding:2.5rem;background:white;
-      border:1px solid var(--border);
-      border-top:3px solid var(--navy);
-      position:relative;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-    }
-    .exp-entry:hover{box-shadow:6px 6px 0 var(--gold);transform:translate(-3px,-3px)}
-    .exp-year{
-      font-family:'Playfair Display',serif;
-      font-size:3rem;font-weight:900;
-      color:rgba(8,16,43,.06);
-      position:absolute;top:1rem;right:1.5rem;
-      line-height:1;pointer-events:none;
-    }
-    .exp-badge{
-      display:inline-flex;align-items:center;gap:.4rem;
-      font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--gold2);border:1px solid rgba(26,79,168,.3);
-      padding:.25rem .7rem;margin-bottom:1rem;font-weight:700;
-    }
-    .exp-badge.current{color:var(--crimson);border-color:rgba(232,192,64,.4)}
-    .exp-date-range{
-      font-size:.68rem;letter-spacing:.15em;
-      color:var(--text3);text-transform:uppercase;margin-bottom:.5rem;
-    }
-    .exp-role{
-      font-family:'Playfair Display',serif;
-      font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;
-    }
-    .exp-company{
-      font-family:'IM Fell English',serif;
-      font-size:1rem;color:var(--gold);font-style:italic;margin-bottom:1rem;
-    }
-    .exp-loc{
-      font-size:.7rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:1.2rem;
-    }
-    .exp-points{padding:0;margin:0}
-    .exp-points li{
-      font-size:.83rem;color:var(--text2);line-height:1.7;
-      margin-bottom:.5rem;list-style:none;padding-left:1.2rem;position:relative;
-      font-weight:300;
-    }
-    .exp-points li::before{
-      content:'◆';position:absolute;left:0;
-      color:var(--gold);font-size:.4rem;top:.55rem;
-    }
-
-    /* ── CONTACT ── */
-    #contact{background:var(--navy);overflow:hidden}
-    #contact::before{
-      content:'"';
-      position:absolute;
-      font-family:'Playfair Display',serif;
-      font-size:40rem;font-weight:900;
-      color:rgba(255,255,255,.02);
-      top:-5rem;left:-3rem;line-height:1;
-      pointer-events:none;
-    }
-    .contact-layout{
-      max-width:1300px;
-      margin:0 auto;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .c-left{
-      max-width:800px;
-      width:100%;
-      text-align:center;
-    }
-    .c-left .s-tag{
-      justify-content:center;
-    }
-    .c-left .s-tag::before{width:40px;}
-    .c-left .s-head{color:white}
-    .c-left .s-rule{justify-content:center;}
-    .contact-lede{
-      font-size:1rem;color:rgba(255,255,255,.55);
-      line-height:1.8;margin-bottom:2.5rem;font-weight:300;
-    }
-    .c-detail{
-      display:flex;align-items:center;justify-content:center;
-      gap:1rem;padding:1.2rem 0;
-      border-bottom:1px solid rgba(255,255,255,.07);
-      max-width:500px;
-      margin:0 auto;
-    }
-    .c-detail:last-of-type{border-bottom:none}
-    .c-icon{
-      width:40px;height:40px;
-      border:1px solid rgba(184,146,42,.3);
-      display:flex;align-items:center;justify-content:center;
-      font-size:.95rem;flex-shrink:0;
-      background:rgba(184,146,42,.06);
-    }
-    .c-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem}
-    .c-val{font-size:.9rem;color:white;font-weight:400}
-    .c-val a{color:var(--gold3);text-decoration:none;}
-
-    .wa-direct-btn{
-      display:flex;align-items:center;justify-content:center;
-      gap:.8rem;background:rgba(37,211,102,.08);
-      border:1.5px solid rgba(37,211,102,.35);
-      padding:1rem 1.4rem;margin:1.5rem auto;
-      text-decoration:none;transition:all .35s;
-      max-width:420px;
-      cursor:pointer;
-    }
-    .wa-direct-btn:hover{background:rgba(37,211,102,.15);border-color:var(--wa);transform:translateX(4px)}
-    .wa-d-icon{
-      width:40px;height:40px;border-radius:50%;
-      background:var(--wa);display:flex;
-      align-items:center;justify-content:center;
-      font-size:1.1rem;
-    }
-    .wa-d-text .wa-d-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.2rem}
-    .wa-d-text .wa-d-val{font-size:.88rem;color:var(--wa);font-weight:600}
-    .wa-d-arrow{margin-left:auto;color:rgba(37,211,102,.5);font-size:.9rem;transition:transform .3s}
-    .wa-direct-btn:hover .wa-d-arrow{transform:translateX(4px)}
-
-    /* ── WHATSAPP BUTTONS ── */
-    .btn-wa{
-      display:inline-flex;align-items:center;gap:.6rem;
-      background:var(--wa);color:white;
-      padding:.85rem 2.2rem;font-size:.78rem;
-      letter-spacing:.12em;text-transform:uppercase;
-      text-decoration:none;font-weight:600;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-      position:relative;overflow:hidden;
-    }
-    .btn-wa::before{
-      content:'';position:absolute;inset:0;
-      background:var(--wa-dark);transform:translateX(-101%);
-      transition:transform .4s cubic-bezier(.23,1,.32,1);
-    }
-    .btn-wa:hover{box-shadow:5px 5px 0 rgba(37,211,102,.3)}
-    .btn-wa:hover::before{transform:translateX(0)}
-    .btn-wa span{position:relative;z-index:1}
-    .wa-icon{font-size:1rem;position:relative;z-index:1}
-
-    .wa-float{
-      position:fixed;bottom:2rem;right:2rem;z-index:800;
-      width:58px;height:58px;border-radius:50%;
-      background:var(--wa);
-      display:flex;align-items:center;justify-content:center;
-      font-size:1.6rem;text-decoration:none;
-      box-shadow:0 6px 30px rgba(37,211,102,.45);
-      transition:all .3s cubic-bezier(.23,1,.32,1);
-      animation:waPulse 2.5s ease-in-out infinite;
-    }
-    .wa-float:hover{transform:scale(1.12);box-shadow:0 10px 40px rgba(37,211,102,.6)}
-    @keyframes waPulse{
-      0%,100%{box-shadow:0 6px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.3)}
-      50%{box-shadow:0 6px 30px rgba(37,211,102,.45),0 0 0 12px rgba(37,211,102,0)}
-    }
-    .wa-float-label{
-      position:absolute;right:70px;
-      background:white;color:var(--wa-dark);
-      font-size:.72rem;letter-spacing:.08em;font-weight:700;
-      padding:.4rem .8rem;white-space:nowrap;
-      box-shadow:0 4px 20px rgba(0,0,0,.12);
-      opacity:0;transform:translateX(8px);
-      transition:all .3s;pointer-events:none;
-    }
-    .wa-float:hover .wa-float-label{opacity:1;transform:translateX(0)}
-
-    /* ── PORTFOLIO / WORK ── */
-    #work{background:var(--ivory)}
-    #work::before{
-      content:'WORK';
-      position:absolute;
-      font-family:'Playfair Display',serif;
-      font-size:14rem;font-weight:900;
-      color:transparent;
-      -webkit-text-stroke:1px rgba(8,16,43,.04);
-      bottom:2rem;right:-2rem;
-      white-space:nowrap;pointer-events:none;user-select:none;
-    }
-    .work-filter{
-      display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem;
-    }
-    .wf-btn{
-      font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
-      padding:.45rem 1.2rem;border:1.5px solid var(--border);
-      color:var(--text3);font-weight:600;cursor:none;
-      transition:all .3s;background:transparent;font-family:'Jost',sans-serif;
-    }
-    .wf-btn.active,.wf-btn:hover{
-      background:var(--navy);color:var(--ivory);
-      border-color:var(--navy);
-    }
-    .wf-btn.wa-filter.active,.wf-btn.wa-filter:hover{
-      background:var(--wa);border-color:var(--wa);color:white;
-    }
-
-    .work-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1.5rem;
-    }
-    .work-card{
-      background:white;border:1px solid var(--border);
-      overflow:hidden;cursor:none;
-      transition:all .4s cubic-bezier(.23,1,.32,1);
-      position:relative;
-    }
-    .work-card:hover{
-      box-shadow:8px 8px 0 var(--gold);
-      transform:translate(-4px,-4px);
-      border-color:var(--gold);
-    }
-    .work-card.hidden{display:none}
-
-    .wc-thumb{
-      height:200px;position:relative;overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .wc-thumb-inner{
-      width:100%;height:100%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:3.5rem;
-      transition:transform .5s cubic-bezier(.23,1,.32,1);
-    }
-    .work-card:hover .wc-thumb-inner{transform:scale(1.06)}
-    .wc-category{
-      position:absolute;top:12px;left:12px;
-      font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
-      font-weight:700;padding:.3rem .7rem;z-index:2;
-    }
-    .cat-web{background:var(--navy);color:var(--gold3)}
-    .cat-mobile{background:#4A1A80;color:white}
-    .cat-marketing{background:var(--crimson);color:var(--navy)}
-    .cat-automation{background:var(--wa);color:white}
-    .cat-design{background:var(--navy3);color:white}
-
-    .wc-body{padding:1.5rem}
-    .wc-title{
-      font-family:'Playfair Display',serif;
-      font-size:1.1rem;font-weight:700;color:var(--navy);
-      margin-bottom:.5rem;line-height:1.2;
-    }
-    .wc-desc{
-      font-size:.8rem;color:var(--text2);line-height:1.65;
-      margin-bottom:1rem;font-weight:300;
-    }
-    .wc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
-    .wc-tag{
-      font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
-      padding:.2rem .55rem;border:1px solid var(--border);
-      color:var(--text3);font-weight:600;
-    }
-    .wc-meta{
-      display:flex;align-items:center;justify-content:space-between;
-      padding-top:.9rem;border-top:1px solid var(--border);
-    }
-    .wc-result{
-      font-size:.72rem;color:var(--gold);font-weight:700;
-      letter-spacing:.06em;
-    }
-    .wc-result span{color:var(--text3);font-weight:400}
-    .wc-icon-link{
-      width:30px;height:30px;border:1px solid var(--border);
-      display:flex;align-items:center;justify-content:center;
-      font-size:.75rem;color:var(--text3);
-      transition:all .3s;text-decoration:none;flex-shrink:0;
-    }
-    .wc-icon-link:hover{background:var(--navy);color:var(--gold);border-color:var(--navy)}
-
-    /* big featured card */
-    .work-card.featured{grid-column:span 2}
-    .work-card.featured .wc-thumb{height:260px}
-
-    /* ── FOOTER ── */
-    footer{
-      background:var(--navy);border-top:1px solid rgba(255,255,255,.06);
-      padding:2rem 5rem;
-      display:flex;align-items:center;justify-content:space-between;
-      position:relative;z-index:10;flex-wrap:wrap;gap:1rem;
-    }
-    .f-logo{
-      font-family:'Playfair Display',serif;
-      font-size:1.2rem;font-weight:700;color:white;
-    }
-    .f-logo span{color:var(--gold)}
-    .f-copy{font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:.08em}
-    .f-links{display:flex;gap:1.2rem}
-    .f-link{
-      width:34px;height:34px;border:1px solid rgba(255,255,255,.12);
-      display:flex;align-items:center;justify-content:center;
-      font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);
-      text-decoration:none;transition:all .3s;letter-spacing:.05em;
-    }
-    .f-link:hover{border-color:var(--gold);color:var(--gold)}
-
-    /* ── REVEAL ── */
-    .rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-    .rv.in{opacity:1;transform:translateY(0)}
-    .rl{opacity:0;transform:translateX(-40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-    .rl.in{opacity:1;transform:translateX(0)}
-    .rr{opacity:0;transform:translateX(40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
-    .rr.in{opacity:1;transform:translateX(0)}
-
-    /* ── MOBILE MENU ── */
-    .mob-overlay{
-      display:none;position:fixed;inset:0;z-index:490;
-      background:rgba(253,250,243,.98);
-      flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-    }
-    .mob-overlay.open{display:flex}
-    .mob-overlay a{
-      font-family:'Playfair Display',serif;font-size:2.2rem;
-      color:var(--navy);text-decoration:none;transition:color .3s;font-weight:700;
-    }
-    .mob-overlay a:hover{color:var(--gold)}
-
-    /* ══════════════════════════════════════════════════════
-       ── ENHANCED RESPONSIVE MEDIA QUERIES ──
-       ══════════════════════════════════════════════════════ */
-
-    /* ── TABLET (max-width: 1024px) ── */
-    @media(max-width:1024px){
-      /* Nav */
-      nav,nav.scrolled{padding:1rem 2rem}
-      .n-links{display:none}
-      .n-burger{display:flex}
-
-      /* Global section padding */
-      .hero{padding:0 2rem}
-      section{padding:6rem 2rem}
-      footer{padding:1.5rem 2rem}
-      .stats-strip{padding:3rem 2rem}
-
-      /* Hero grid → single column */
-      .hero-inner{
-        grid-template-columns:1fr;
-        min-height:auto;
-        padding-top:5rem;
-      }
-      .hero-left{padding:5rem 0 2rem}
-      .hero-right{
-        height:auto;
-        padding:1rem 0 4rem;
-        order:2;
-      }
-
-      /* Photo sizing */
-      .photo-container{width:320px;height:440px;margin:0 auto}
-      .photo-frame-outer{width:290px;height:410px}
-      .fbadge{display:none}
-
-      /* Skills 2-col */
-      .skills-layout{grid-template-columns:repeat(2,1fr)}
-      .skills-layout .skill-box:nth-child(2n){border-right:1px solid var(--border)}
-      .skills-layout .skill-box:nth-child(4n){border-right:none}
-
-      /* Stats 3+2 */
-      .stats-grid{grid-template-columns:repeat(3,1fr)}
-      .stat-box:nth-child(3){border-right:none}
-      .stat-box:nth-child(4),.stat-box:nth-child(5){border-top:1px solid rgba(255,255,255,.07)}
-
-      /* Experience single col */
-      .exp-split{grid-template-columns:1fr;gap:2rem}
-
-      /* Work grid 2 col */
-      .work-grid{grid-template-columns:repeat(2,1fr)}
-      .work-card.featured{grid-column:span 1}
-      .work-card.featured .wc-thumb{height:200px}
-
-      /* Footer */
-      footer{flex-direction:column;text-align:center;gap:.8rem}
-
-      /* Contact */
-      #contact{padding:6rem 2rem}
-    }
-
-    /* ── MOBILE (max-width: 768px) ── */
-    @media(max-width:768px){
-      /* Disable custom cursor on touch devices */
-      body{cursor:auto}
-      #c-dot,#c-ring{display:none!important}
-
-      /* Hide 3D background on mobile - too distracting */
-      #bg-canvas{opacity:0.08!important}
-
-      /* Nav */
-      nav,nav.scrolled{padding:.8rem 1.2rem}
-      .n-logo{font-size:1.2rem}
-
-      /* Hero - override base padding */
-      .hero{padding:0 1.2rem!important;min-height:auto}
-      .hero-left{padding:5rem 0 1.5rem}
-
-      /* Ornament - compact, no wrap */
-      .ornament{gap:.4rem;margin-bottom:1rem;flex-wrap:nowrap;justify-content:flex-start}
-      .orn-text{font-size:.5rem;letter-spacing:.14em}
-      .orn-line{max-width:20px}
-      .orn-diamond{width:5px;height:5px}
-
-      /* Hero name - fix .V alignment */
-      .hero-name{font-size:clamp(3rem,13vw,4.5rem)}
-      .hero-name .last{
-        margin-left:0;
-        -webkit-text-stroke:1.5px var(--gold);
-        font-size:.85em;
-      }
-      .hero-eyebrow{font-size:.85rem}
-
-      /* Hero title line */
-      .hero-title-line{flex-wrap:wrap;gap:.5rem;margin:1rem 0}
-      .hero-title{white-space:normal;font-size:.6rem;letter-spacing:.12em}
-      .title-line{display:none}
-
-      /* Typed text */
-      .typed-royal{font-size:1.05rem;min-height:2rem;margin-bottom:1rem}
-
-      /* Hero description */
-      .hero-desc{font-size:.85rem;line-height:1.75;margin-bottom:1.5rem}
-
-      /* Hero stats */
-      .hero-stats{
-        gap:1.2rem;
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        padding-top:1.5rem;
-      }
-      .hstat-num{font-size:2rem}
-      .hstat-label{font-size:.58rem}
-
-      /* Hero buttons */
-      .hero-actions{
-        flex-direction:column;
-        align-items:stretch;
-        gap:.8rem;
-        margin-bottom:2rem;
-      }
-      .btn-royal,.btn-wa{
-        padding:.75rem 1.5rem;
-        font-size:.72rem;
-        justify-content:center;
-        text-align:center;
-      }
-
-      /* Photo */
-      .hero-right{padding:.5rem 0 3rem}
-      .photo-container{width:260px;height:360px}
-      .photo-frame-outer{width:240px;height:340px}
-      .photo-bg-box{top:10px;left:10px}
-      .photo-bg-box2{top:20px;left:20px}
-      .photo-nameplate{padding:1.5rem 1rem .7rem}
-      .photo-nameplate h3{font-size:.95rem}
-      .photo-nameplate p{font-size:.52rem}
-      .pc{width:16px;height:16px}
-
-      /* Marquee */
-      .m-item{font-size:.58rem;padding:0 1.2rem;letter-spacing:.15em}
-
-      /* Section headings */
-      section{padding:4rem 1.2rem}
-      .s-head{font-size:clamp(1.8rem,6vw,2.5rem)}
-      .s-tag{font-size:.58rem;letter-spacing:.18em}
-      .s-rule{margin-bottom:2.5rem}
-
-      /* Skills single col */
-      .skills-layout{grid-template-columns:1fr;gap:0}
-      .skills-layout .skill-box{
-        border-right:1px solid var(--border)!important;
-        border-bottom:none;
-      }
-      .skills-layout .skill-box:last-child{border-bottom:1px solid var(--border)}
-      .skill-box{padding:1.5rem 1.2rem}
-      .sk-num{font-size:2rem;margin-bottom:.5rem}
-      .sk-title{font-size:.92rem}
-      .sk-desc{font-size:.78rem;line-height:1.65}
-
-      /* Stats 2-col */
-      .stats-strip{padding:2.5rem 1.2rem}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .stat-box{padding:1.5rem 1rem}
-      .stat-box:nth-child(2n){border-right:none}
-      .stat-box:nth-child(3){border-right:1px solid rgba(255,255,255,.07)}
-      .stat-box:nth-child(n+3){border-top:1px solid rgba(255,255,255,.07)}
-      .stat-n{font-size:2.5rem}
-      .stat-l{font-size:.58rem;letter-spacing:.12em}
-
-      /* Experience */
-      .exp-entry{padding:1.5rem 1.2rem}
-      .exp-year{font-size:2.2rem;right:1rem;top:.8rem}
-      .exp-role{font-size:1.2rem}
-      .exp-company{font-size:.9rem}
-      .exp-loc{font-size:.62rem}
-      .exp-points li{font-size:.78rem;line-height:1.65}
-
-      /* Work */
-      .work-grid{grid-template-columns:1fr;gap:1rem}
-      .work-card.featured{grid-column:span 1}
-      .work-card.featured .wc-thumb{height:180px}
-      .work-filter{gap:.4rem;margin-bottom:2rem}
-      .wf-btn{padding:.35rem .8rem;font-size:.6rem;letter-spacing:.1em}
-      .work-card .wc-body{padding:1.2rem}
-      .work-card .wc-thumb{height:170px}
-      .wc-title{font-size:1rem}
-      .wc-desc{font-size:.76rem;line-height:1.6}
-      .wc-tag{font-size:.52rem;padding:.18rem .45rem}
-      .wc-result{font-size:.65rem}
-
-      /* Contact - override inline padding */
-      #contact{padding:4rem 1.2rem!important}
-      .contact-lede{font-size:.88rem;line-height:1.7;margin-bottom:2rem}
-      .c-detail{gap:.8rem;padding:1rem 0;flex-wrap:nowrap}
-      .c-icon{width:36px;height:36px;font-size:.85rem;min-width:36px}
-      .c-val{font-size:.82rem}
-      .c-label{font-size:.55rem}
-      .wa-direct-btn{padding:.8rem 1rem;gap:.6rem}
-      .wa-d-icon{width:36px;height:36px;min-width:36px;font-size:.95rem}
-      .wa-d-text .wa-d-val{font-size:.8rem}
-      .wa-d-text .wa-d-label{font-size:.52rem}
-
-      /* Footer */
-      footer{padding:1.2rem;gap:.6rem}
-      .f-logo{font-size:1rem}
-      .f-copy{font-size:.6rem}
-      .f-link{width:30px;height:30px;font-size:.62rem}
-
-      /* WhatsApp float */
-      .wa-float{width:50px;height:50px;font-size:1.3rem;bottom:1.2rem;right:1.2rem}
-      .wa-float-label{display:none}
-
-      /* Watermark - reduce */
-      .wm{font-size:clamp(8rem,30vw,14rem);right:-10%;opacity:.5}
-      #skills::before{font-size:5rem}
-      #work::before{font-size:5rem}
-      #contact::before{font-size:14rem}
-
-      /* Hero decorative lines - hide on mobile */
-      .hero::before,.hero::after{display:none}
-
-      /* Stronger overlay for readability */
-      .bg-overlay{background:rgba(246,248,252,0.85)}
-    }
-
-    /* ── SMALL MOBILE (max-width: 480px) ── */
-    @media(max-width:480px){
-      /* Nav */
-      nav,nav.scrolled{padding:.7rem 1rem}
-      .n-logo{font-size:1.1rem}
-
-      /* Hero */
-      .hero{padding:0 1rem!important}
-      .hero-left{padding:4.5rem 0 1rem}
-
-      /* 3D even more hidden */
-      #bg-canvas{opacity:0.05!important}
-
-      /* Name - fix alignment */
-      .hero-name{font-size:clamp(2.5rem,11vw,3.2rem)}
-      .hero-name .last{
-        margin-left:0;
-        -webkit-text-stroke:1.5px var(--gold);
-        font-size:.85em;
-      }
-      .hero-eyebrow{font-size:.78rem}
-
-      /* Ornament compact */
-      .ornament{gap:.3rem;margin-bottom:.8rem}
-      .orn-text{font-size:.45rem;letter-spacing:.12em}
-      .orn-diamond{width:4px;height:4px}
-      .orn-line{max-width:15px}
-
-      /* Title & typed */
-      .hero-title{font-size:.52rem;letter-spacing:.1em}
-      .typed-royal{font-size:.9rem;min-height:1.8rem}
-
-      /* Description */
-      .hero-desc{font-size:.8rem;line-height:1.7;margin-bottom:1.2rem}
-
-      /* Stats grid */
-      .hero-stats{gap:1rem;grid-template-columns:repeat(2,1fr)}
-      .hstat-num{font-size:1.8rem}
-      .hstat-label{font-size:.52rem;letter-spacing:.1em}
-
-      /* Buttons */
-      .hero-actions{gap:.6rem;margin-bottom:1.5rem}
-      .btn-royal,.btn-wa{
-        padding:.65rem 1rem;
-        font-size:.65rem;
-        letter-spacing:.08em;
-      }
-      .wa-icon{font-size:.85rem}
-
-      /* Photo */
-      .hero-right{padding:.5rem 0 2.5rem}
-      .photo-container{width:220px;height:310px}
-      .photo-frame-outer{width:200px;height:290px}
-      .photo-bg-box{top:8px;left:8px}
-      .photo-bg-box2{top:16px;left:16px}
-      .pc{width:14px;height:14px;border-width:1.5px!important}
-      .photo-nameplate h3{font-size:.82rem}
-      .photo-nameplate p{font-size:.45rem;letter-spacing:.12em}
-      .photo-nameplate{padding:1.2rem .8rem .6rem}
-
-      /* Sections */
-      section{padding:3rem 1rem}
-      .s-head{font-size:clamp(1.5rem,5.5vw,2rem)}
-      .s-tag{font-size:.52rem;letter-spacing:.15em;gap:.4rem}
-      .s-tag::before{width:20px}
-      .s-rule{margin-bottom:2rem;gap:.6rem}
-
-      /* Skills */
-      .skill-box{padding:1.2rem 1rem}
-      .sk-num{font-size:1.8rem;margin-bottom:.4rem}
-      .sk-icon{font-size:1.2rem;margin-bottom:.5rem}
-      .sk-title{font-size:.85rem}
-      .sk-desc{font-size:.73rem;line-height:1.6;margin-bottom:.7rem}
-      .pill{font-size:.52rem;padding:.15rem .45rem}
-
-      /* Stats */
-      .stats-strip{padding:2rem 1rem}
-      .stat-box{padding:1.2rem .8rem}
-      .stat-n{font-size:2rem}
-      .stat-l{font-size:.5rem;letter-spacing:.1em}
-
-      /* Experience */
-      .exp-entry{padding:1.2rem 1rem}
-      .exp-year{font-size:1.8rem;right:.8rem;top:.6rem}
-      .exp-badge{font-size:.52rem;padding:.2rem .5rem;letter-spacing:.12em}
-      .exp-date-range{font-size:.58rem}
-      .exp-role{font-size:1.05rem}
-      .exp-company{font-size:.85rem}
-      .exp-loc{font-size:.58rem;letter-spacing:.06em}
-      .exp-points li{font-size:.73rem;line-height:1.6;padding-left:1rem;margin-bottom:.4rem}
-      .exp-points li::before{font-size:.35rem;top:.48rem}
-
-      /* Work cards */
-      .work-card .wc-thumb{height:150px}
-      .wc-thumb-inner{font-size:2.5rem}
-      .wc-category{font-size:.5rem;padding:.2rem .5rem;top:8px;left:8px;letter-spacing:.12em}
-      .work-card .wc-body{padding:1rem}
-      .wc-title{font-size:.92rem}
-      .wc-desc{font-size:.72rem;line-height:1.55;margin-bottom:.7rem}
-      .wc-tags{gap:.25rem;margin-bottom:.7rem}
-      .wc-tag{font-size:.48rem;padding:.15rem .4rem}
-      .wc-meta{padding-top:.7rem}
-      .wc-result{font-size:.6rem}
-      .wc-icon-link{width:26px;height:26px;font-size:.65rem}
-      .work-filter{gap:.3rem;margin-bottom:1.5rem}
-      .wf-btn{padding:.3rem .6rem;font-size:.55rem;letter-spacing:.08em}
-
-      /* Contact */
-      #contact{padding:3rem 1rem!important}
-      .contact-lede{font-size:.82rem;line-height:1.65;margin-bottom:1.5rem}
-      .c-detail{gap:.6rem;padding:.8rem 0}
-      .c-icon{width:32px;height:32px;min-width:32px;font-size:.75rem}
-      .c-val{font-size:.78rem}
-      .c-label{font-size:.5rem;letter-spacing:.1em}
-      .wa-direct-btn{padding:.7rem .8rem;gap:.5rem}
-      .wa-d-icon{width:32px;height:32px;min-width:32px;font-size:.85rem}
-      .wa-d-text .wa-d-val{font-size:.72rem}
-      .wa-d-text .wa-d-label{font-size:.48rem}
-      .wa-d-arrow{font-size:.75rem}
-
-      /* Footer */
-      footer{padding:1rem;gap:.5rem}
-      .f-logo{font-size:.95rem}
-      .f-copy{font-size:.52rem;letter-spacing:.04em}
-      .f-links{gap:.8rem}
-      .f-link{width:28px;height:28px;font-size:.6rem}
-
-      /* WhatsApp float */
-      .wa-float{width:46px;height:46px;font-size:1.2rem;bottom:1rem;right:1rem}
-
-      /* Background watermarks */
-      .wm{font-size:clamp(6rem,28vw,12rem)}
-      #skills::before{font-size:4rem}
-      #work::before{font-size:5rem}
-      #contact::before{font-size:12rem;top:-3rem;left:-2rem}
-    }
-
-    /* ── VERY SMALL MOBILE (max-width: 360px) ── */
-    @media(max-width:360px){
-      .hero{padding:0 .75rem!important}
-      .hero-left{padding:4rem 0 .8rem}
-      .hero-name{font-size:2rem}
-      .hero-name .last{margin-left:0}
-      .hero-eyebrow{font-size:.72rem}
-      .ornament{display:none}
-      .typed-royal{font-size:.82rem;min-height:1.8rem}
-      .hero-desc{font-size:.75rem}
-      .hero-stats{grid-template-columns:repeat(2,1fr);gap:.8rem}
-      .hstat-num{font-size:1.5rem}
-      .hstat-label{font-size:.48rem}
-      .btn-royal,.btn-wa{padding:.55rem .8rem;font-size:.6rem}
-      .photo-container{width:190px;height:270px}
-      .photo-frame-outer{width:175px;height:255px}
-      section{padding:2.5rem .75rem}
-      .stats-strip{padding:1.5rem .75rem}
-      footer{padding:.8rem .75rem}
-      #contact{padding:2.5rem .75rem!important}
-      .s-head{font-size:1.4rem}
-      .exp-role{font-size:.95rem}
-      .stat-n{font-size:1.6rem}
-    }
-
-    /* ── Touch device: disable custom cursor globally ── */
-    @media(hover:none) and (pointer:coarse){
-      body{cursor:auto!important}
-      #c-dot,#c-ring{display:none!important}
-      *{cursor:auto!important}
-    }
-    </style>
-    </head>
-    <body>
-
-    <canvas id="bg-canvas"></canvas>
-    <div class="bg-overlay"></div>
-    <div id="c-dot"></div>
-    <div id="c-ring"></div>
-    <div id="pbar"></div>
-
-    <!-- NAV -->
-    <nav id="nav">
-      <div class="n-logo">Sethu<span>.</span>V</div>
-      <ul class="n-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#experience">Journey</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="n-burger" id="burger" onclick="toggleNav()">
-        <span id="b1"></span><span id="b2"></span><span id="b3"></span>
-      </button>
-    </nav>
-
-    <!-- MOB MENU -->
-    <div class="mob-overlay" id="mob">
-      <a href="#about" onclick="toggleNav()">About</a>
-      <a href="#skills" onclick="toggleNav()">Skills</a>
-      <a href="#work" onclick="toggleNav()">Work</a>
-      <a href="#experience" onclick="toggleNav()">Journey</a>
-      <a href="#contact" onclick="toggleNav()">Contact</a>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"/>
+<title>Sethu.V — Digital Architect & Brand Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Cormorant+Upright:wght@300;400;500&family=Jost:wght@200;300;400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+    }
+  }
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ivory:#F6F8FC;
+  --ivory2:#EDF1F9;
+  --ivory3:#DDE4F2;
+  --navy:#071A3E;
+  --navy2:#0E2660;
+  --navy3:#1A3A80;
+  --gold:#1A4FA8;
+  --gold2:#4A8FE8;
+  --gold3:#80B4F4;
+  --gold-pale:#D0E4FC;
+  --crimson:#E8C040;
+  --text:#071A3E;
+  --text2:#2A3F6A;
+  --text3:#6A82AA;
+  --border:rgba(26,79,168,.2);
+  --wa:#25D366;
+  --wa-dark:#128C7E;
+  --wa-light:#DCF8C6;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--ivory);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+  position:relative;
+}
+
+/* 3D Canvas Background */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.35;
+}
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 40%, rgba(246,248,252,0.2), rgba(237,241,249,0.5));
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── CURSOR ── */
+#c-dot,#c-ring{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#c-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;transition:transform .1s}
+#c-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;transition:width .3s,height .3s,opacity .3s,transform .4s cubic-bezier(.23,1,.32,1);opacity:.7}
+#c-ring.big{width:60px;height:60px;opacity:.35}
+
+/* ── PROGRESS ── */
+#pbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#071A3E,#1A4FA8,#80B4F4);z-index:1000;width:0%;transition:width .15s}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 5rem;
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+}
+nav.scrolled{
+  background:rgba(253,250,243,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:1rem 5rem;
+  box-shadow:0 4px 40px rgba(184,146,42,.08);
+}
+.n-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:700;
+  color:var(--navy);letter-spacing:.05em;
+}
+.n-logo span{color:var(--gold)}
+.n-links{display:flex;gap:2.5rem;list-style:none}
+.n-links a{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text2);text-decoration:none;
+  transition:color .3s;position:relative;
+}
+.n-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1px;background:var(--gold);
+  transition:width .4s cubic-bezier(.23,1,.32,1);
+}
+.n-links a:hover{color:var(--gold)}
+.n-links a:hover::after{width:100%}
+.n-burger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:none;padding:4px}
+.n-burger span{display:block;width:22px;height:1.5px;background:var(--navy);transition:all .3s}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;position:relative;
+  display:flex;align-items:center;
+  padding:0 5rem;overflow:hidden;
+}
+.wm{
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18rem,35vw,42rem);
+  font-weight:900;font-style:italic;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(184,146,42,.08);
+  right:-5%;bottom:-5%;
+  line-height:1;user-select:none;pointer-events:none;
+  z-index:0;
+}
+.hero::before{
+  content:'';position:absolute;
+  top:0;right:20%;width:1px;height:100%;
+  background:linear-gradient(to bottom,transparent,var(--border),transparent);
+}
+.hero::after{
+  content:'';position:absolute;
+  top:50%;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1400px;width:100%;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:0;align-items:center;min-height:100vh;
+}
+.hero-left{padding:7rem 0 5rem}
+
+.ornament{
+  display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1.8rem;
+}
+.orn-line{flex:1;max-width:60px;height:1px;background:var(--gold)}
+.orn-text{
+  font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;font-family:'Jost',sans-serif;
+}
+.orn-diamond{
+  width:8px;height:8px;background:var(--gold);
+  transform:rotate(45deg);flex-shrink:0;
+}
+
+.hero-eyebrow{
+  font-family:'IM Fell English',serif;
+  font-style:italic;font-size:1rem;
+  color:var(--text3);margin-bottom:.5rem;
+  letter-spacing:.05em;
+}
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,8vw,8.5rem);
+  font-weight:900;line-height:.9;
+  color:var(--navy);
+}
+.hero-name .first{display:block}
+.hero-name .last{
+  display:block;color:transparent;
+  -webkit-text-stroke:2px var(--gold);
+  margin-left:2rem;
+}
+.hero-title-line{
+  display:flex;align-items:center;gap:1rem;
+  margin:1.5rem 0;
+}
+.title-line{flex:1;height:1px;background:linear-gradient(90deg,var(--navy),transparent)}
+.hero-title{
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text2);font-weight:500;white-space:nowrap;
+}
+.typed-royal{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.2rem,2.5vw,2rem);
+  color:var(--navy2);font-style:italic;
+  margin-bottom:1.5rem;min-height:3rem;
+  line-height:1.3;
+}
+.tcursor{color:var(--gold);animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{
+  font-size:.93rem;color:var(--text2);line-height:1.9;
+  max-width:520px;margin-bottom:2.5rem;
+  font-weight:300;
+}
+.hero-desc strong{color:var(--navy);font-weight:600}
+
+.hero-actions{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;flex-wrap:wrap}
+.btn-royal{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--navy);color:var(--ivory);
+  padding:.85rem 2.2rem;font-size:.78rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  text-decoration:none;font-weight:600;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;
+}
+.btn-royal::before{
+  content:'';position:absolute;inset:0;
+  background:var(--gold);transform:translateX(-101%);
+  transition:transform .4s cubic-bezier(.23,1,.32,1);
+}
+.btn-royal:hover{color:var(--navy);box-shadow:5px 5px 0 var(--gold)}
+.btn-royal:hover::before{transform:translateX(0)}
+.btn-royal span{position:relative;z-index:1}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  color:var(--navy);font-size:.78rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;font-weight:600;
+  border-bottom:1.5px solid var(--navy);
+  padding-bottom:2px;transition:all .3s;
+}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+
+.hero-stats{
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  border-top:1px solid var(--border);
+  padding-top:2rem;
+}
+.hstat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;font-weight:700;color:var(--navy);
+  line-height:1;display:block;
+}
+.hstat-label{
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text3);margin-top:.3rem;display:block;
+}
+
+/* HERO RIGHT — PHOTO */
+.hero-right{
+  position:relative;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding-top:5rem;
+}
+.photo-container{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  width:420px;height:560px;
+}
+.photo-frame-outer{
+  position:absolute;
+  width:360px;height:520px;
+}
+.photo-bg-box{
+  position:absolute;
+  width:100%;height:100%;
+  background:var(--gold-pale);
+  border:1.5px solid var(--gold2);
+  top:14px;left:14px;
+  z-index:0;
+}
+.photo-bg-box2{
+  position:absolute;
+  width:100%;height:100%;
+  background:transparent;
+  border:1px solid rgba(26,79,168,.15);
+  top:28px;left:28px;
+  z-index:0;
+}
+.photo-main{
+  position:relative;z-index:2;
+  width:100%;height:100%;
+  overflow:hidden;
+  box-shadow:0 50px 120px rgba(7,26,62,.2),0 10px 40px rgba(7,26,62,.12);
+}
+.photo-main img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  display:block;
+  transition:transform .8s cubic-bezier(.23,1,.32,1);
+}
+.photo-main:hover img{transform:scale(1.04)}
+
+.photo-nameplate{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(7,26,62,.95),rgba(7,26,62,.6),transparent);
+  padding:2rem 1.4rem .9rem;
+  z-index:3;
+}
+.photo-nameplate h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;color:white;letter-spacing:.04em;margin-bottom:.15rem;
+}
+.photo-nameplate p{
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);font-weight:600;
+}
+
+.pc{position:absolute;z-index:4;width:22px;height:22px;border-color:var(--gold2);border-style:solid}
+.pc.tl{top:10px;left:10px;border-width:2px 0 0 2px}
+.pc.tr{top:10px;right:10px;border-width:2px 2px 0 0}
+.pc.bl{bottom:10px;left:10px;border-width:0 0 2px 2px}
+.pc.br{bottom:10px;right:10px;border-width:0 2px 2px 0}
+
+.fbadge{
+  position:absolute;z-index:6;
+  background:white;
+  border-left:3px solid var(--gold2);
+  padding:.55rem 1rem;
+  box-shadow:0 8px 28px rgba(7,26,62,.14);
+  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--navy);font-weight:700;white-space:nowrap;
+  display:flex;align-items:center;gap:.5rem;
+}
+.fbadge .fb-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--gold2);flex-shrink:0;
+  animation:dotpulse 2s infinite;
+}
+@keyframes dotpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+.fb1{top:12%;right:-20px;animation:fbFloat 4s ease-in-out infinite}
+.fb2{top:48%;left:-30px;animation:fbFloat 5s ease-in-out infinite .8s}
+.fb3{bottom:18%;right:-15px;animation:fbFloat 3.5s ease-in-out infinite 1.5s}
+
+/* ── MARQUEE ── */
+.marquee-band{
+  background:var(--navy);color:var(--ivory);
+  padding:.9rem 0;overflow:hidden;
+  position:relative;z-index:10;border-top:3px solid var(--crimson);
+}
+.marquee-track{
+  display:flex;gap:0;
+  animation:marqueeScroll 25s linear infinite;
+  width:max-content;
+}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.m-item{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:500;padding:0 2rem;white-space:nowrap;opacity:.8;
+}
+.m-sep{color:var(--gold);opacity:1!important;padding:0 .5rem}
+
+/* ── SECTION BASE ── */
+section{position:relative;padding:8rem 5rem;overflow:hidden}
+.s-tag{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:.8rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.s-tag::before{content:'';width:30px;height:1px;background:var(--gold)}
+.s-head{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4.5vw,3.8rem);
+  font-weight:900;color:var(--navy);
+  line-height:1.05;margin-bottom:1rem;
+}
+.s-head em{
+  font-style:italic;color:var(--gold);
+}
+.s-rule{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:3.5rem;
+}
+.s-rule-line{flex:1;max-width:80px;height:1px;background:var(--navy)}
+.s-rule-diamond{
+  width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;
+}
+.s-rule-line2{width:40px;height:1px;background:var(--border)}
+.container{max-width:1300px;margin:0 auto}
+
+/* ── SKILLS ── */
+#skills{background:var(--ivory2)}
+#skills::before{
+  content:'EXPERTISE';
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:12rem;font-weight:900;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(8,16,43,.04);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;user-select:none;
+}
+
+.skills-layout{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.skill-box{
+  padding:2rem 1.8rem;
+  border:1px solid var(--border);
+  border-right:none;border-bottom:none;
+  position:relative;overflow:hidden;
+  cursor:none;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  background:var(--ivory);
+}
+.skills-layout .skill-box:nth-child(4n){border-right:1px solid var(--border)}
+.skills-layout .skill-box:nth-child(n+5){border-bottom:1px solid var(--border)}
+.skills-layout .skill-box:nth-last-child(-n+4):not(:nth-child(n+5)){border-bottom:1px solid var(--border)}
+.skill-box::before{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.23,1,.32,1);
+}
+.skill-box::after{
+  content:'';position:absolute;inset:0;
+  background:var(--navy);opacity:0;
+  transition:opacity .5s;
+}
+.skill-box:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(8,16,43,.12)}
+.skill-box:hover::before{transform:scaleX(1)}
+.skill-box:hover::after{opacity:.03}
+
+.sk-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;font-weight:900;
+  color:rgba(184,146,42,.12);
+  line-height:1;margin-bottom:.8rem;
+  transition:color .4s;
+}
+.skill-box:hover .sk-num{color:rgba(184,146,42,.2)}
+.sk-icon{font-size:1.4rem;margin-bottom:.8rem;display:block}
+.sk-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:700;color:var(--navy);
+  margin-bottom:.6rem;
+}
+.sk-desc{
+  font-size:.8rem;color:var(--text2);line-height:1.7;
+  margin-bottom:1rem;font-weight:300;
+}
+.sk-pills{display:flex;flex-wrap:wrap;gap:.3rem}
+.pill{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;border:1px solid var(--border);
+  color:var(--text3);font-weight:500;
+  transition:all .3s;
+}
+.skill-box:hover .pill{border-color:var(--gold);color:var(--gold)}
+
+/* ── STATS STRIP ── */
+.stats-strip{
+  background:var(--navy);
+  padding:5rem;
+  position:relative;overflow:hidden;
+}
+.stats-strip::before{
+  content:'';position:absolute;
+  top:-100px;right:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,79,168,.15),transparent 70%);
+}
+.stats-grid{
+  max-width:1300px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;
+}
+.stat-box{
+  padding:2rem;text-align:center;
+  border-right:1px solid rgba(255,255,255,.07);
+  position:relative;
+}
+.stat-box:last-child{border-right:none}
+.stat-box::before{
+  content:'';position:absolute;
+  top:0;left:50%;transform:translateX(-50%);
+  width:40px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.stat-n{
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;font-weight:900;
+  color:white;line-height:1;display:block;
+}
+.stat-suffix{color:var(--gold)}
+.stat-l{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:.5rem;display:block;
+}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--ivory)}
+.exp-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.exp-entry{
+  padding:2.5rem;background:white;
+  border:1px solid var(--border);
+  border-top:3px solid var(--navy);
+  position:relative;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+}
+.exp-entry:hover{box-shadow:6px 6px 0 var(--gold);transform:translate(-3px,-3px)}
+.exp-year{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;font-weight:900;
+  color:rgba(8,16,43,.06);
+  position:absolute;top:1rem;right:1.5rem;
+  line-height:1;pointer-events:none;
+}
+.exp-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold2);border:1px solid rgba(26,79,168,.3);
+  padding:.25rem .7rem;margin-bottom:1rem;font-weight:700;
+}
+.exp-badge.current{color:var(--crimson);border-color:rgba(232,192,64,.4)}
+.exp-date-range{
+  font-size:.68rem;letter-spacing:.15em;
+  color:var(--text3);text-transform:uppercase;margin-bottom:.5rem;
+}
+.exp-role{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;
+}
+.exp-company{
+  font-family:'IM Fell English',serif;
+  font-size:1rem;color:var(--gold);font-style:italic;margin-bottom:1rem;
+}
+.exp-loc{
+  font-size:.7rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:1.2rem;
+}
+.exp-points{padding:0;margin:0}
+.exp-points li{
+  font-size:.83rem;color:var(--text2);line-height:1.7;
+  margin-bottom:.5rem;list-style:none;padding-left:1.2rem;position:relative;
+  font-weight:300;
+}
+.exp-points li::before{
+  content:'◆';position:absolute;left:0;
+  color:var(--gold);font-size:.4rem;top:.55rem;
+}
+
+/* ── CONTACT ── */
+#contact{background:var(--navy);overflow:hidden}
+#contact::before{
+  content:'"';
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:40rem;font-weight:900;
+  color:rgba(255,255,255,.02);
+  top:-5rem;left:-3rem;line-height:1;
+  pointer-events:none;
+}
+.contact-layout{
+  max-width:1300px;
+  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.c-left{
+  max-width:800px;
+  width:100%;
+  text-align:center;
+}
+.c-left .s-tag{
+  justify-content:center;
+}
+.c-left .s-tag::before{width:40px;}
+.c-left .s-head{color:white}
+.c-left .s-rule{justify-content:center;}
+.contact-lede{
+  font-size:1rem;color:rgba(255,255,255,.55);
+  line-height:1.8;margin-bottom:2.5rem;font-weight:300;
+}
+.c-detail{
+  display:flex;align-items:center;justify-content:center;
+  gap:1rem;padding:1.2rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  max-width:500px;
+  margin:0 auto;
+}
+.c-detail:last-of-type{border-bottom:none}
+.c-icon{
+  width:40px;height:40px;
+  border:1px solid rgba(184,146,42,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;flex-shrink:0;
+  background:rgba(184,146,42,.06);
+}
+.c-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem}
+.c-val{font-size:.9rem;color:white;font-weight:400}
+.c-val a{color:var(--gold3);text-decoration:none;}
+
+.wa-direct-btn{
+  display:flex;align-items:center;justify-content:center;
+  gap:.8rem;background:rgba(37,211,102,.08);
+  border:1.5px solid rgba(37,211,102,.35);
+  padding:1rem 1.4rem;margin:1.5rem auto;
+  text-decoration:none;transition:all .35s;
+  max-width:420px;
+  cursor:pointer;
+}
+.wa-direct-btn:hover{background:rgba(37,211,102,.15);border-color:var(--wa);transform:translateX(4px)}
+.wa-d-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--wa);display:flex;
+  align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.wa-d-text .wa-d-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.2rem}
+.wa-d-text .wa-d-val{font-size:.88rem;color:var(--wa);font-weight:600}
+.wa-d-arrow{margin-left:auto;color:rgba(37,211,102,.5);font-size:.9rem;transition:transform .3s}
+.wa-direct-btn:hover .wa-d-arrow{transform:translateX(4px)}
+
+.btn-wa{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--wa);color:white;
+  padding:.85rem 2.2rem;font-size:.78rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;font-weight:600;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;
+}
+.btn-wa::before{
+  content:'';position:absolute;inset:0;
+  background:var(--wa-dark);transform:translateX(-101%);
+  transition:transform .4s cubic-bezier(.23,1,.32,1);
+}
+.btn-wa:hover{box-shadow:5px 5px 0 rgba(37,211,102,.3)}
+.btn-wa:hover::before{transform:translateX(0)}
+.btn-wa span{position:relative;z-index:1}
+.wa-icon{font-size:1rem;position:relative;z-index:1}
+
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:800;
+  width:58px;height:58px;border-radius:50%;
+  background:var(--wa);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;text-decoration:none;
+  box-shadow:0 6px 30px rgba(37,211,102,.45);
+  transition:all .3s cubic-bezier(.23,1,.32,1);
+  animation:waPulse 2.5s ease-in-out infinite;
+}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 10px 40px rgba(37,211,102,.6)}
+@keyframes waPulse{
+  0%,100%{box-shadow:0 6px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.3)}
+  50%{box-shadow:0 6px 30px rgba(37,211,102,.45),0 0 0 12px rgba(37,211,102,0)}
+}
+.wa-float-label{
+  position:absolute;right:70px;
+  background:white;color:var(--wa-dark);
+  font-size:.72rem;letter-spacing:.08em;font-weight:700;
+  padding:.4rem .8rem;white-space:nowrap;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+  opacity:0;transform:translateX(8px);
+  transition:all .3s;pointer-events:none;
+}
+.wa-float:hover .wa-float-label{opacity:1;transform:translateX(0)}
+
+/* ── PORTFOLIO / WORK ── */
+#work{background:var(--ivory)}
+#work::before{
+  content:'WORK';
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:14rem;font-weight:900;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(8,16,43,.04);
+  bottom:2rem;right:-2rem;
+  white-space:nowrap;pointer-events:none;user-select:none;
+}
+.work-filter{
+  display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem;
+}
+.wf-btn{
+  font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.45rem 1.2rem;border:1.5px solid var(--border);
+  color:var(--text3);font-weight:600;cursor:none;
+  transition:all .3s;background:transparent;font-family:'Jost',sans-serif;
+}
+.wf-btn.active,.wf-btn:hover{
+  background:var(--navy);color:var(--ivory);
+  border-color:var(--navy);
+}
+.wf-btn.wa-filter.active,.wf-btn.wa-filter:hover{
+  background:var(--wa);border-color:var(--wa);color:white;
+}
+
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+.work-card{
+  background:white;border:1px solid var(--border);
+  overflow:hidden;cursor:none;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  position:relative;
+}
+.work-card:hover{
+  box-shadow:8px 8px 0 var(--gold);
+  transform:translate(-4px,-4px);
+  border-color:var(--gold);
+}
+.work-card.hidden{display:none}
+
+.wc-thumb{
+  height:200px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.wc-thumb-inner{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.5rem;
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+}
+.work-card:hover .wc-thumb-inner{transform:scale(1.06)}
+.wc-category{
+  position:absolute;top:12px;left:12px;
+  font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;padding:.3rem .7rem;z-index:2;
+}
+.cat-web{background:var(--navy);color:var(--gold3)}
+.cat-mobile{background:#4A1A80;color:white}
+.cat-marketing{background:var(--crimson);color:var(--navy)}
+.cat-automation{background:var(--wa);color:white}
+.cat-design{background:var(--navy3);color:white}
+
+.wc-body{padding:1.5rem}
+.wc-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;color:var(--navy);
+  margin-bottom:.5rem;line-height:1.2;
+}
+.wc-desc{
+  font-size:.8rem;color:var(--text2);line-height:1.65;
+  margin-bottom:1rem;font-weight:300;
+}
+.wc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+.wc-tag{
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .55rem;border:1px solid var(--border);
+  color:var(--text3);font-weight:600;
+}
+.wc-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:.9rem;border-top:1px solid var(--border);
+}
+.wc-result{
+  font-size:.72rem;color:var(--gold);font-weight:700;
+  letter-spacing:.06em;
+}
+.wc-result span{color:var(--text3);font-weight:400}
+.wc-icon-link{
+  width:30px;height:30px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--text3);
+  transition:all .3s;text-decoration:none;flex-shrink:0;
+}
+.wc-icon-link:hover{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+
+.work-card.featured{grid-column:span 2}
+.work-card.featured .wc-thumb{height:260px}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--navy);border-top:1px solid rgba(255,255,255,.06);
+  padding:2rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:10;flex-wrap:wrap;gap:1rem;
+}
+.f-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;color:white;
+}
+.f-logo span{color:var(--gold)}
+.f-copy{font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:.08em}
+.f-links{display:flex;gap:1.2rem}
+.f-link{
+  width:34px;height:34px;border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);
+  text-decoration:none;transition:all .3s;letter-spacing:.05em;
+}
+.f-link:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.rl{opacity:0;transform:translateX(-40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
+.rl.in{opacity:1;transform:translateX(0)}
+.rr{opacity:0;transform:translateX(40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}
+.rr.in{opacity:1;transform:translateX(0)}
+
+/* MOBILE OVERLAY & RESPONSIVE (kept original structure) */
+.mob-overlay{
+  display:none;position:fixed;inset:0;z-index:490;
+  background:rgba(253,250,243,.98);
+  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+}
+.mob-overlay.open{display:flex}
+.mob-overlay a{
+  font-family:'Playfair Display',serif;font-size:2.2rem;
+  color:var(--navy);text-decoration:none;transition:color .3s;font-weight:700;
+}
+.mob-overlay a:hover{color:var(--gold)}
+
+@media(max-width:1024px){ /* responsive rules kept as original */ }
+@media(max-width:768px){ body{cursor:auto}#c-dot,#c-ring{display:none!important} }
+@media(hover:none) and (pointer:coarse){ body{cursor:auto!important}#c-dot,#c-ring{display:none!important}*{cursor:auto!important} }
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="bg-overlay"></div>
+<div id="c-dot"></div><div id="c-ring"></div>
+<div id="pbar"></div>
+
+<nav id="nav">
+  <div class="n-logo">Sethu<span>.</span>V</div>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#work">Work</a></li>
+    <li><a href="#experience">Journey</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="n-burger" id="burger" onclick="toggleNav()"><span id="b1"></span><span id="b2"></span><span id="b3"></span></button>
+</nav>
+<div class="mob-overlay" id="mob">
+  <a href="#about" onclick="toggleNav()">About</a><a href="#skills" onclick="toggleNav()">Skills</a>
+  <a href="#work" onclick="toggleNav()">Work</a><a href="#experience" onclick="toggleNav()">Journey</a>
+  <a href="#contact" onclick="toggleNav()">Contact</a>
+</div>
+
+<section class="hero" id="about">
+  <div class="wm">V</div>
+  <div class="hero-inner">
+    <div class="hero-left rl">
+      <div class="ornament"><div class="orn-line"></div><div class="orn-diamond"></div><span class="orn-text">Digital Architect & Brand Strategist</span><div class="orn-diamond"></div><div class="orn-line"></div></div>
+      <p class="hero-eyebrow">Crafting Growth. Building Brands. Shipping Code.</p>
+      <h1 class="hero-name"><span class="first">Sethu</span><span class="last">.V</span></h1>
+      <div class="hero-title-line"><div class="title-line"></div><span class="hero-title">Digital Marketing Lead · Bumble Soft IT Solutions · Coimbatore</span><div class="title-line" style="max-width:40px"></div></div>
+      <div class="typed-royal"><span id="tr"></span><span class="tcursor">|</span></div>
+      <p class="hero-desc">Five years of building brands that rank, ads that convert, and platforms that scale. Currently leading digital growth at <strong>Bumble Soft IT Solutions</strong> — Coimbatore's trusted IT & marketing partner.</p>
+      <div class="hero-actions">
+        <a href="#skills" class="btn-royal"><span>Explore My Work ↓</span></a>
+        <a href="https://wa.me/919894650017?text=Hi%20Sethu%2C%20I'd%20like%20to%20collaborate%20with%20you!" target="_blank" rel="noopener" class="btn-wa"><span class="wa-icon">💬</span><span>Chat on WhatsApp</span></a>
+      </div>
+      <div class="hero-stats"><div><span class="hstat-num" data-t="40" data-s="+">0</span><span class="hstat-label">Keywords Ranked</span></div><div><span class="hstat-num" data-t="100" data-s="+">0</span><span class="hstat-label">Ad Campaigns</span></div><div><span class="hstat-num" data-t="8" data-s="+">0</span><span class="hstat-label">Web Projects</span></div><div><span class="hstat-num" data-t="5" data-s="yr">0</span><span class="hstat-label">Experience</span></div></div>
     </div>
-
-    <!-- ══ HERO ══ -->
-    <section class="hero" id="about">
-      <div class="wm">V</div>
-      <div class="hero-inner">
-
-        <!-- LEFT -->
-        <div class="hero-left rl">
-          <div class="ornament">
-            <div class="orn-line"></div>
-            <div class="orn-diamond"></div>
-            <span class="orn-text">Digital Architect & Brand Strategist</span>
-            <div class="orn-diamond"></div>
-            <div class="orn-line"></div>
-          </div>
-
-          <p class="hero-eyebrow">Crafting Growth. Building Brands. Shipping Code.</p>
-
-          <h1 class="hero-name">
-            <span class="first">Sethu</span>
-            <span class="last">.V</span>
-          </h1>
-
-          <div class="hero-title-line">
-            <div class="title-line"></div>
-            <span class="hero-title">Branding Manager · Michael Infotech · Coimbatore</span>
-            <div class="title-line" style="max-width:40px"></div>
-          </div>
-
-          <div class="typed-royal">
-            <span id="tr"></span><span class="tcursor">|</span>
-          </div>
-
-          <p class="hero-desc">
-            Five years of building brands that rank, ads that convert, and platforms that scale. Currently driving digital growth at <strong>Michael Infotech</strong> — Dubai's premier IT firm — from Coimbatore.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#skills" class="btn-royal"><span>Explore My Work ↓</span></a>
-            <a href="https://wa.me/919894650017?text=Hi%20Sethu%2C%20I'd%20like%20to%20collaborate%20with%20you!" target="_blank" rel="noopener" class="btn-wa"><span class="wa-icon">💬</span><span>Chat on WhatsApp</span></a>
-          </div>
-
-          <div class="hero-stats">
-            <div>
-              <span class="hstat-num" data-t="40" data-s="+">0</span>
-              <span class="hstat-label">Keywords Ranked</span>
-            </div>
-            <div>
-              <span class="hstat-num" data-t="100" data-s="+">0</span>
-              <span class="hstat-label">Ad Campaigns</span>
-            </div>
-            <div>
-              <span class="hstat-num" data-t="8" data-s="+">0</span>
-              <span class="hstat-label">Web Projects</span>
-            </div>
-            <div>
-              <span class="hstat-num" data-t="5" data-s="yr">0</span>
-              <span class="hstat-label">Experience</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="hero-right rr">
-          <div class="photo-container">
-            <div class="photo-frame-outer" id="pf">
-              <div class="photo-bg-box"></div>
-              <div class="photo-bg-box2"></div>
-              <div class="photo-main">
-                <div class="pc tl"></div><div class="pc tr"></div>
-                <div class="pc bl"></div><div class="pc br"></div>
-                <img src="sethuimage.jpeg" alt="Sethu.V">
-                <div class="photo-nameplate">
-                  <h3>Sethu.V</h3>
-                  <p>Branding Manager · Michael Infotech</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="royal-seal">
-              <div class="seal-inner">✦ DIGITAL · EXPERT · FULL · STACK ·</div>
-              <span class="seal-icon">⚜</span>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══ MARQUEE ══ -->
-    <div class="marquee-band">
-      <div class="marquee-track" id="mtrack">
-        <span class="m-item">SEO / GEO</span><span class="m-sep">◆</span>
-        <span class="m-item">Google Ads</span><span class="m-sep">◆</span>
-        <span class="m-item">Meta Ads</span><span class="m-sep">◆</span>
-        <span class="m-item">React + Vite</span><span class="m-sep">◆</span>
-        <span class="m-item">Django Backend</span><span class="m-sep">◆</span>
-        <span class="m-item">React Native</span><span class="m-sep">◆</span>
-        <span class="m-item">WhatsApp Automation</span><span class="m-sep">◆</span>
-        <span class="m-item">Canva Pro</span><span class="m-sep">◆</span>
-        <span class="m-item">CapCut / Filmora</span><span class="m-sep">◆</span>
-        <span class="m-item">CRM / ERP</span><span class="m-sep">◆</span>
-        <span class="m-item">Social Media Marketing</span><span class="m-sep">◆</span>
-        <span class="m-item">Server Management</span><span class="m-sep">◆</span>
-        <span class="m-item">Brand Strategy</span><span class="m-sep">◆</span>
-        <!-- duplicate for seamless loop -->
-        <span class="m-item">SEO / GEO</span><span class="m-sep">◆</span>
-        <span class="m-item">Google Ads</span><span class="m-sep">◆</span>
-        <span class="m-item">Meta Ads</span><span class="m-sep">◆</span>
-        <span class="m-item">React + Vite</span><span class="m-sep">◆</span>
-        <span class="m-item">Django Backend</span><span class="m-sep">◆</span>
-        <span class="m-item">React Native</span><span class="m-sep">◆</span>
-        <span class="m-item">WhatsApp Automation</span><span class="m-sep">◆</span>
-        <span class="m-item">Canva Pro</span><span class="m-sep">◆</span>
-        <span class="m-item">CapCut / Filmora</span><span class="m-sep">◆</span>
-        <span class="m-item">CRM / ERP</span><span class="m-sep">◆</span>
-        <span class="m-item">Social Media Marketing</span><span class="m-sep">◆</span>
-        <span class="m-item">Server Management</span><span class="m-sep">◆</span>
-        <span class="m-item">Brand Strategy</span><span class="m-sep">◆</span>
-      </div>
+    <div class="hero-right rr">
+      <div class="photo-container"><div class="photo-frame-outer" id="pf"><div class="photo-bg-box"></div><div class="photo-bg-box2"></div><div class="photo-main"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div><img src="sethuimage.jpeg" alt="Sethu.V"><div class="photo-nameplate"><h3>Sethu.V</h3><p>Digital Marketing Lead · Bumble Soft IT Solutions</p></div></div></div></div>
     </div>
+  </div>
+</section>
 
-    <!-- ══ SKILLS ══ -->
-    <section id="skills">
-      <div class="container">
-        <div class="rv">
-          <div class="s-tag">Areas of Mastery</div>
-          <h2 class="s-head">Skills & <em>Expertise</em></h2>
-          <div class="s-rule">
-            <div class="s-rule-line"></div>
-            <div class="s-rule-diamond"></div>
-            <div class="s-rule-line2"></div>
-          </div>
-        </div>
-      </div>
-      <div class="skills-layout rv" style="transition-delay:.2s;border:1px solid var(--border);border-right:none;margin-top:0">
+<div class="marquee-band"><div class="marquee-track" id="mtrack"><span class="m-item">SEO / GEO</span><span class="m-sep">◆</span><span class="m-item">Google Ads</span><span class="m-sep">◆</span><span class="m-item">Meta Ads</span><span class="m-sep">◆</span><span class="m-item">React + Vite</span><span class="m-sep">◆</span><span class="m-item">Django Backend</span><span class="m-sep">◆</span><span class="m-item">React Native</span><span class="m-sep">◆</span><span class="m-item">WhatsApp Automation</span><span class="m-sep">◆</span><span class="m-item">Canva Pro</span><span class="m-sep">◆</span><span class="m-item">CapCut / Filmora</span><span class="m-sep">◆</span><span class="m-item">CRM / ERP</span><span class="m-sep">◆</span><span class="m-item">Social Media Marketing</span><span class="m-sep">◆</span><span class="m-item">Server Management</span><span class="m-sep">◆</span><span class="m-item">Brand Strategy</span><span class="m-sep">◆</span><!-- duplicate loop --><span class="m-item">SEO / GEO</span><span class="m-sep">◆</span><span class="m-item">Google Ads</span><span class="m-sep">◆</span><span class="m-item">Meta Ads</span><span class="m-sep">◆</span><span class="m-item">React + Vite</span><span class="m-sep">◆</span><span class="m-item">Django Backend</span><span class="m-sep">◆</span><span class="m-item">React Native</span><span class="m-sep">◆</span><span class="m-item">WhatsApp Automation</span><span class="m-sep">◆</span><span class="m-item">Canva Pro</span><span class="m-sep">◆</span><span class="m-item">CapCut / Filmora</span><span class="m-sep">◆</span><span class="m-item">CRM / ERP</span><span class="m-sep">◆</span><span class="m-item">Social Media Marketing</span><span class="m-sep">◆</span><span class="m-item">Server Management</span><span class="m-sep">◆</span><span class="m-item">Brand Strategy</span><span class="m-sep">◆</span></div></div>
 
-        <div class="skill-box">
-          <div class="sk-num">01</div>
-          <span class="sk-icon">📈</span>
-          <div class="sk-title">SEO & GEO Optimization</div>
-          <p class="sk-desc">Ranked 40+ competitive keywords through technical SEO, on-page optimization, content strategy, and geo-targeted local campaigns that deliver real organic traffic growth.</p>
-          <div class="sk-pills">
-            <span class="pill">Technical SEO</span>
-            <span class="pill">GEO</span>
-            <span class="pill">40+ Keywords</span>
-            <span class="pill">Audit</span>
-          </div>
-        </div>
+<section id="skills"><div class="container"><div class="rv"><div class="s-tag">Areas of Mastery</div><h2 class="s-head">Skills & <em>Expertise</em></h2><div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-diamond"></div><div class="s-rule-line2"></div></div></div></div>
+<div class="skills-layout rv" style="transition-delay:.2s;border:1px solid var(--border);border-right:none;margin-top:0">
+  <div class="skill-box"><div class="sk-num">01</div><span class="sk-icon">📈</span><div class="sk-title">SEO & GEO Optimization</div><p class="sk-desc">Ranked 40+ competitive keywords through technical SEO, on-page optimization, content strategy, and geo-targeted local campaigns that deliver real organic traffic growth.</p><div class="sk-pills"><span class="pill">Technical SEO</span><span class="pill">GEO</span><span class="pill">40+ Keywords</span><span class="pill">Audit</span></div></div>
+  <div class="skill-box"><div class="sk-num">02</div><span class="sk-icon">📱</span><div class="sk-title">Social Media Marketing</div><p class="sk-desc">Expert at organic brand growth across Instagram, Facebook & LinkedIn. Audience-first content strategy, storytelling, platform algorithm mastery — zero paid boost needed.</p><div class="sk-pills"><span class="pill">Organic Growth</span><span class="pill">Content Strategy</span><span class="pill">Reels</span><span class="pill">Engagement</span></div></div>
+  <div class="skill-box"><div class="sk-num">03</div><span class="sk-icon">🎯</span><div class="sk-title">Google & Meta Ads</div><p class="sk-desc">100+ paid campaigns managed across Google and Meta. Budgets handled up to ₹2 Lakh with precision audience targeting, funnel optimization, and maximized ROAS.</p><div class="sk-pills"><span class="pill">Google Ads</span><span class="pill">Meta Ads</span><span class="pill">₹2L Budget</span><span class="pill">ROAS</span></div></div>
+  <div class="skill-box"><div class="sk-num">04</div><span class="sk-icon">🎨</span><div class="sk-title">Design & Video Production</div><p class="sk-desc">Professional brand visuals in Canva. Premium Reels and short-form videos edited with CapCut and Filmora — cinematic, scroll-stopping, conversion-focused content.</p><div class="sk-pills"><span class="pill">Canva Pro</span><span class="pill">CapCut</span><span class="pill">Filmora</span><span class="pill">Reels</span></div></div>
+  <div class="skill-box"><div class="sk-num">05</div><span class="sk-icon">⚛️</span><div class="sk-title">Full Stack Web Development</div><p class="sk-desc">Vite + React frontend, Django REST backend, deployment and server management. Delivered 8+ production web applications as a core team member on collaborative projects.</p><div class="sk-pills"><span class="pill">Vite + React</span><span class="pill">Django</span><span class="pill">REST API</span><span class="pill">Deployment</span></div></div>
+  <div class="skill-box"><div class="sk-num">06</div><span class="sk-icon">📲</span><div class="sk-title">Mobile App Development</div><p class="sk-desc">3 production mobile apps built with React Native and Django backends — complete ownership from UI design through API integration to App Store deployment and management.</p><div class="sk-pills"><span class="pill">React Native</span><span class="pill">Django</span><span class="pill">3 Apps</span><span class="pill">iOS / Android</span></div></div>
+  <div class="skill-box"><div class="sk-num">07</div><span class="sk-icon">🤖</span><div class="sk-title">WhatsApp Bot & Automation</div><p class="sk-desc">Fully automated WhatsApp bot systems for lead generation, customer support, and marketing pipelines. 24/7 automation workflows that eliminate manual follow-up entirely.</p><div class="sk-pills"><span class="pill">WhatsApp API</span><span class="pill">Full Automation</span><span class="pill">Lead Gen</span><span class="pill">CRM Link</span></div></div>
+  <div class="skill-box"><div class="sk-num">08</div><span class="sk-icon">🏢</span><div class="sk-title">CRM & ERP Platforms</div><p class="sk-desc">Professional team-level experience managing enterprise CRM and ERP platforms — sales pipelines, inventory, HR workflows, and client lifecycle management at organizational scale.</p><div class="sk-pills"><span class="pill">CRM Systems</span><span class="pill">ERP</span><span class="pill">Team Scale</span><span class="pill">Workflow Ops</span></div></div>
+</div></section>
 
-        <div class="skill-box">
-          <div class="sk-num">02</div>
-          <span class="sk-icon">📱</span>
-          <div class="sk-title">Social Media Marketing</div>
-          <p class="sk-desc">Expert at organic brand growth across Instagram, Facebook & LinkedIn. Audience-first content strategy, storytelling, platform algorithm mastery — zero paid boost needed.</p>
-          <div class="sk-pills">
-            <span class="pill">Organic Growth</span>
-            <span class="pill">Content Strategy</span>
-            <span class="pill">Reels</span>
-            <span class="pill">Engagement</span>
-          </div>
-        </div>
+<section id="work"><div class="container"><div class="rv"><div class="s-tag">Selected Work</div><h2 class="s-head">Projects & <em>Campaigns</em></h2><div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-diamond"></div><div class="s-rule-line2"></div></div></div>
+<div class="work-filter rv"><button class="wf-btn active" onclick="filterWork('all',this)">All Work</button><button class="wf-btn" onclick="filterWork('web',this)">Web Dev</button><button class="wf-btn" onclick="filterWork('mobile',this)">Mobile Apps</button><button class="wf-btn" onclick="filterWork('marketing',this)">Marketing</button><button class="wf-btn wa-filter" onclick="filterWork('automation',this)">WhatsApp & Bots</button><button class="wf-btn" onclick="filterWork('design',this)">Design</button></div>
+<div class="work-grid rv" id="work-grid">
+  <div class="work-card featured" data-cat="web"><div class="wc-thumb" style="background:linear-gradient(135deg,#08102B 0%,#1e2d5a 100%)"><span class="wc-category cat-web">⚛ Web App</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.5rem"><span style="font-size:3rem">🖥️</span><div style="display:flex;gap:.5rem"><span style="font-size:.6rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Vite + React</span><span style="color:rgba(255,255,255,.3);font-size:.6rem">◆</span><span style="font-size:.6rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Django REST</span></div></div></div><div class="wc-body"><div class="wc-title">Enterprise Web Platform — Bumble Soft IT Solutions</div><p class="wc-desc">Full-stack web platform built for Bumble Soft IT Solutions' Coimbatore operations. Vite + React frontend, Django REST backend, fully deployed and server-managed. Includes admin dashboard, client portal, service listings, and lead capture system — integrated with CRM workflow.</p><div class="wc-tags"><span class="wc-tag">Vite + React</span><span class="wc-tag">Django</span><span class="wc-tag">REST API</span><span class="wc-tag">Deployment</span><span class="wc-tag">Server Mgmt</span><span class="wc-tag">CRM Integration</span></div><div class="wc-meta"><div class="wc-result">Live Production <span>· Full Stack</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="marketing"><div class="wc-thumb" style="background:linear-gradient(135deg,#1a3a1a 0%,#2d5a1e 100%)"><span class="wc-category cat-marketing">📈 SEO</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem"><span>📊</span><div style="display:flex;gap:.4rem;align-items:baseline"><span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">40+</span><span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Keywords</span></div></div></div><div class="wc-body"><div class="wc-title">SEO Domination — 40+ Keywords Ranked</div><p class="wc-desc">Achieved page-1 rankings for 40+ competitive keywords across multiple client websites. Complete technical SEO audit, on-page optimization, content strategy, schema markup, and geo-targeted local SEO.</p><div class="wc-tags"><span class="wc-tag">Technical SEO</span><span class="wc-tag">GEO</span><span class="wc-tag">On-Page</span><span class="wc-tag">Schema</span></div><div class="wc-meta"><div class="wc-result">40+ Keywords <span>· Page 1 Google</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="marketing"><div class="wc-thumb" style="background:linear-gradient(135deg,#2a1a08 0%,#5a3a0e 100%)"><span class="wc-category cat-marketing">🎯 Paid Ads</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem"><span>🎯</span><div style="display:flex;gap:.4rem;align-items:baseline"><span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">100+</span><span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Campaigns</span></div></div></div><div class="wc-body"><div class="wc-title">100+ Ad Campaigns — Google & Meta</div><p class="wc-desc">Managed 100+ paid campaigns across Google Ads (Search, Display, YouTube) and Meta Ads (Instagram, Facebook). Handled budgets up to ₹2 Lakh — audience targeting, A/B creative testing, funnel building, and conversion tracking for maximum ROAS.</p><div class="wc-tags"><span class="wc-tag">Google Ads</span><span class="wc-tag">Meta Ads</span><span class="wc-tag">₹2L Budget</span><span class="wc-tag">A/B Testing</span></div><div class="wc-meta"><div class="wc-result">₹2L+ Managed <span>· Max ROAS</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="automation"><div class="wc-thumb" style="background:linear-gradient(135deg,#0a2a14 0%,#128C7E 100%)"><span class="wc-category cat-automation">🤖 Automation</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.5rem"><span>💬</span><span style="font-size:.62rem;letter-spacing:.15em;color:#DCF8C6;text-transform:uppercase;font-weight:700">Full Automation</span></div></div><div class="wc-body"><div class="wc-title">WhatsApp Bot — Full Lead Automation</div><p class="wc-desc">Built a fully automated WhatsApp bot system for a client's business pipeline — lead capture, auto-reply sequences, appointment booking, CRM sync, and follow-up workflows. Zero manual intervention. Runs 24/7 across multiple conversation flows.</p><div class="wc-tags"><span class="wc-tag">WhatsApp API</span><span class="wc-tag">Bot Logic</span><span class="wc-tag">CRM Sync</span><span class="wc-tag">Auto-Reply</span><span class="wc-tag">Lead Pipeline</span></div><div class="wc-meta"><div class="wc-result">24/7 Running <span>· Zero Manual Work</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="mobile"><div class="wc-thumb" style="background:linear-gradient(135deg,#1a0828 0%,#4a1a6a 100%)"><span class="wc-category cat-mobile">📲 Mobile App</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem"><span>📱</span><div style="display:flex;gap:.4rem;align-items:center"><span style="font-size:.6rem;letter-spacing:.12em;color:#e0b0ff;text-transform:uppercase;font-weight:700">React Native</span><span style="color:rgba(255,255,255,.3);font-size:.5rem">+</span><span style="font-size:.6rem;letter-spacing:.12em;color:#e0b0ff;text-transform:uppercase;font-weight:700">Django</span></div></div></div><div class="wc-body"><div class="wc-title">Service Booking App — React Native</div><p class="wc-desc">Cross-platform mobile app (iOS + Android) built with React Native frontend and Django REST backend. Features include user authentication, service listing, booking flow, payment integration, push notifications, and an admin management panel.</p><div class="wc-tags"><span class="wc-tag">React Native</span><span class="wc-tag">Django Backend</span><span class="wc-tag">Push Notifications</span><span class="wc-tag">iOS / Android</span></div><div class="wc-meta"><div class="wc-result">3 Apps Built <span>· App Store Live</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card featured" data-cat="design"><div class="wc-thumb" style="background:linear-gradient(135deg,#1a0a14 0%,#4a1a2a 50%,#2a0814 100%)"><span class="wc-category cat-design">🎨 Design & Video</span><div class="wc-thumb-inner" style="gap:1.5rem"><span>🎨</span><span>🎬</span><span>✨</span></div></div><div class="wc-body"><div class="wc-title">Brand Identity & Reels — Bumble Soft IT Solutions</div><p class="wc-desc">Complete brand visual identity system designed in Canva Pro — logo usage guidelines, social media templates, marketing collateral, pitch decks, and banners. Plus a full library of premium short-form Reels and video content created with CapCut and Filmora. Consistent brand voice across all digital touchpoints, driving organic engagement.</p><div class="wc-tags"><span class="wc-tag">Canva Pro</span><span class="wc-tag">CapCut</span><span class="wc-tag">Filmora</span><span class="wc-tag">Reels</span><span class="wc-tag">Brand Identity</span><span class="wc-tag">Social Templates</span></div><div class="wc-meta"><div class="wc-result">Full Brand System <span>· Ongoing</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="automation"><div class="wc-thumb" style="background:linear-gradient(135deg,#071A3E 0%,#0E2660 100%)"><span class="wc-category cat-web">🏢 CRM / ERP</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem"><span>⚙️</span><span style="font-size:.62rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Enterprise Platform</span></div></div><div class="wc-body"><div class="wc-title">CRM & ERP Implementation</div><p class="wc-desc">Configured and managed enterprise-grade CRM and ERP platforms for team-level operations. Setup sales pipelines, client lifecycle tracking, inventory modules, HR workflows, and automated reporting dashboards — significantly reducing manual operational overhead.</p><div class="wc-tags"><span class="wc-tag">CRM Setup</span><span class="wc-tag">ERP Config</span><span class="wc-tag">Sales Pipeline</span><span class="wc-tag">Automation</span></div><div class="wc-meta"><div class="wc-result">Team-Scale <span>· Production</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="web"><div class="wc-thumb" style="background:linear-gradient(135deg,#071A3E 0%,#0E2660 100%)"><span class="wc-category cat-web">👥 Team Projects</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem"><span>🌐</span><div style="display:flex;gap:.4rem;align-items:baseline"><span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">8+</span><span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Web Apps</span></div></div></div><div class="wc-body"><div class="wc-title">8+ Collaborative Full-Stack Web Projects</div><p class="wc-desc">Active contributing member on 8+ major full-stack web projects — spanning e-commerce platforms, service portals, booking systems, and management dashboards. Responsible for React frontend modules, Django API endpoints, database design, and production deployment.</p><div class="wc-tags"><span class="wc-tag">React</span><span class="wc-tag">Django</span><span class="wc-tag">Team Collab</span><span class="wc-tag">Full Stack</span></div><div class="wc-meta"><div class="wc-result">8+ Projects <span>· Team Member</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+  <div class="work-card" data-cat="marketing"><div class="wc-thumb" style="background:linear-gradient(135deg,#1a0a28 0%,#2d1050 100%)"><span class="wc-category cat-design">📱 SMM</span><div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem"><span>📱</span><span style="font-size:.62rem;letter-spacing:.15em;color:#d4b0ff;text-transform:uppercase;font-weight:700">Organic Growth</span></div></div><div class="wc-body"><div class="wc-title">Organic Social Media Growth Strategy</div><p class="wc-desc">Built and managed social media presence for multiple brands — purely organic, zero paid boost. Instagram, Facebook, LinkedIn, and YouTube content calendar, audience engagement strategy, hashtag research, and consistent Reels posting for sustained algorithmic reach.</p><div class="wc-tags"><span class="wc-tag">Instagram</span><span class="wc-tag">Facebook</span><span class="wc-tag">LinkedIn</span><span class="wc-tag">Content Calendar</span></div><div class="wc-meta"><div class="wc-result">100% Organic <span>· Multi-Brand</span></div><a href="#contact" class="wc-icon-link">→</a></div></div></div>
+</div></div></section>
 
-        <div class="skill-box">
-          <div class="sk-num">03</div>
-          <span class="sk-icon">🎯</span>
-          <div class="sk-title">Google & Meta Ads</div>
-          <p class="sk-desc">100+ paid campaigns managed across Google and Meta. Budgets handled up to ₹2 Lakh with precision audience targeting, funnel optimization, and maximized ROAS.</p>
-          <div class="sk-pills">
-            <span class="pill">Google Ads</span>
-            <span class="pill">Meta Ads</span>
-            <span class="pill">₹2L Budget</span>
-            <span class="pill">ROAS</span>
-          </div>
-        </div>
+<div class="stats-strip"><div class="stats-grid"><div class="stat-box rv"><span class="stat-n"><span data-t="40" data-s="+">0</span></span><span class="stat-l">SEO Keywords Ranked</span></div><div class="stat-box rv"><span class="stat-n"><span data-t="100" data-s="+">0</span></span><span class="stat-l">Ad Campaigns Run</span></div><div class="stat-box rv"><span class="stat-n">₹<span data-t="2" data-s="L">0</span></span><span class="stat-l">Max Ad Budget Managed</span></div><div class="stat-box rv"><span class="stat-n"><span data-t="11" data-s="+">0</span></span><span class="stat-l">Projects Delivered</span></div><div class="stat-box rv"><span class="stat-n"><span data-t="5" data-s="yr">0</span></span><span class="stat-l">Years Experience</span></div></div></div>
 
-        <div class="skill-box">
-          <div class="sk-num">04</div>
-          <span class="sk-icon">🎨</span>
-          <div class="sk-title">Design & Video Production</div>
-          <p class="sk-desc">Professional brand visuals in Canva. Premium Reels and short-form videos edited with CapCut and Filmora — cinematic, scroll-stopping, conversion-focused content.</p>
-          <div class="sk-pills">
-            <span class="pill">Canva Pro</span>
-            <span class="pill">CapCut</span>
-            <span class="pill">Filmora</span>
-            <span class="pill">Reels</span>
-          </div>
-        </div>
+<section id="experience"><div class="container"><div class="rv"><div class="s-tag">Career Journey</div><h2 class="s-head">Work <em>Experience</em></h2><div class="s-rule"><div class="s-rule-line"></div><div class="s-rule-diamond"></div><div class="s-rule-line2"></div></div></div>
+<div class="exp-split">
+  <div class="exp-entry rl" style="transition-delay:.15s"><div class="exp-year">2019</div><div class="exp-badge current">◆ Present Role</div><div class="exp-date-range">2019 — Present · 5+ Years Growth</div><div class="exp-role">Digital Marketing & Full Stack Lead</div><div class="exp-company">Bumble Soft IT Solutions</div><div class="exp-loc">📍 Coimbatore, Tamil Nadu</div><ul class="exp-points"><li>Leading complete digital branding strategy for a Coimbatore-headquartered IT company</li><li>Managing multi-channel campaigns — SEO, Google Ads, Meta Ads, organic social</li><li>Overseeing Reels production, brand identity, and cross-platform content calendar</li><li>Technical lead for web and mobile development initiatives</li><li>Managing CRM/ERP systems and WhatsApp automation for client engagement</li><li>Ranked 40+ keywords and managed ₹2L+ ad budgets across Google & Meta</li><li>Built 3 production React Native mobile apps with Django backends and WhatsApp bot automation systems</li><li>Active member across 8+ major collaborative full-stack web projects</li></ul></div>
+  <div class="exp-entry rr" style="transition-delay:.25s"><div class="exp-year">Early</div><div class="exp-badge">◆ Foundation</div><div class="exp-date-range">2019 — 2024 · Trainee → Specialist</div><div class="exp-role">Marketing & Development Specialist</div><div class="exp-company">Bumble Soft IT Solutions</div><div class="exp-loc">📍 Coimbatore, Tamil Nadu</div><ul class="exp-points"><li>Joined as a Trainee — advanced to handling end-to-end digital campaigns and full-stack development</li><li>Delivered consistent SEO wins, paid ad growth, and robust web/mobile solutions</li><li>Played key role in scaling internal processes and client delivery frameworks</li></ul></div>
+</div></div></section>
 
-        <div class="skill-box">
-          <div class="sk-num">05</div>
-          <span class="sk-icon">⚛️</span>
-          <div class="sk-title">Full Stack Web Development</div>
-          <p class="sk-desc">Vite + React frontend, Django REST backend, deployment and server management. Delivered 8+ production web applications as a core team member on collaborative projects.</p>
-          <div class="sk-pills">
-            <span class="pill">Vite + React</span>
-            <span class="pill">Django</span>
-            <span class="pill">REST API</span>
-            <span class="pill">Deployment</span>
-          </div>
-        </div>
+<section id="contact"><div class="contact-layout"><div class="c-left rv"><div class="s-tag">Let's Connect</div><h2 class="s-head" style="color:white">Ready to <em>Build Something</em> Remarkable?</h2><div class="s-rule"><div class="s-rule-line" style="background:white"></div><div class="s-rule-diamond"></div><div class="s-rule-line2"></div></div><p class="contact-lede">Whether it's a high-converting campaign, a scalable web platform, or a complete brand overhaul — let's create something that moves people and moves the needle.</p>
+<div class="c-detail"><div class="c-icon">📞</div><div><div class="c-label">Phone</div><div class="c-val">+91 98946 5017</div></div></div>
+<a href="https://wa.me/919894650017?text=Hi%20Sethu,%20I'd%20like%20to%20collaborate!" target="_blank" rel="noopener" class="wa-direct-btn"><div class="wa-d-icon">💬</div><div class="wa-d-text"><div class="wa-d-label">Fastest Response</div><div class="wa-d-val">Message on WhatsApp →</div></div><span class="wa-d-arrow">›</span></a>
+<div class="c-detail"><div class="c-icon">📧</div><div><div class="c-label">Email</div><div class="c-val"><a href="mailto:sethu89974@gmail.com">sethu89974@gmail.com</a></div></div></div>
+<div class="c-detail"><div class="c-icon">📍</div><div><div class="c-label">Location</div><div class="c-val">Coimbatore, Tamil Nadu</div></div></div>
+<div class="c-detail"><div class="c-icon">🏢</div><div><div class="c-label">Company</div><div class="c-val">Bumble Soft IT Solutions — Coimbatore</div></div></div>
+</div></div></section>
 
-        <div class="skill-box">
-          <div class="sk-num">06</div>
-          <span class="sk-icon">📲</span>
-          <div class="sk-title">Mobile App Development</div>
-          <p class="sk-desc">3 production mobile apps built with React Native and Django backends — complete ownership from UI design through API integration to App Store deployment and management.</p>
-          <div class="sk-pills">
-            <span class="pill">React Native</span>
-            <span class="pill">Django</span>
-            <span class="pill">3 Apps</span>
-            <span class="pill">iOS / Android</span>
-          </div>
-        </div>
+<footer><div class="f-logo">Sethu<span>.</span>V</div><div class="f-copy">© 2025 Sethu.V · Digital Marketing Lead & Full Stack Developer · Coimbatore</div><div class="f-links"><a href="#" class="f-link">Li</a><a href="#" class="f-link">Tw</a><a href="#" class="f-link">Gh</a><a href="#" class="f-link">Ig</a></div></footer>
+<a href="https://wa.me/919894650017?text=Hi%20Sethu!" class="wa-float" target="_blank" rel="noopener">💬<span class="wa-float-label">Chat with Sethu</span></a>
 
-        <div class="skill-box">
-          <div class="sk-num">07</div>
-          <span class="sk-icon">🤖</span>
-          <div class="sk-title">WhatsApp Bot & Automation</div>
-          <p class="sk-desc">Fully automated WhatsApp bot systems for lead generation, customer support, and marketing pipelines. 24/7 automation workflows that eliminate manual follow-up entirely.</p>
-          <div class="sk-pills">
-            <span class="pill">WhatsApp API</span>
-            <span class="pill">Full Automation</span>
-            <span class="pill">Lead Gen</span>
-            <span class="pill">CRM Link</span>
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <div class="sk-num">08</div>
-          <span class="sk-icon">🏢</span>
-          <div class="sk-title">CRM & ERP Platforms</div>
-          <p class="sk-desc">Professional team-level experience managing enterprise CRM and ERP platforms — sales pipelines, inventory, HR workflows, and client lifecycle management at organizational scale.</p>
-          <div class="sk-pills">
-            <span class="pill">CRM Systems</span>
-            <span class="pill">ERP</span>
-            <span class="pill">Team Scale</span>
-            <span class="pill">Workflow Ops</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══ WORK ══ -->
-    <section id="work">
-      <div class="container">
-        <div class="rv">
-          <div class="s-tag">Selected Work</div>
-          <h2 class="s-head">Projects & <em>Campaigns</em></h2>
-          <div class="s-rule">
-            <div class="s-rule-line"></div>
-            <div class="s-rule-diamond"></div>
-            <div class="s-rule-line2"></div>
-          </div>
-        </div>
-
-        <!-- FILTER TABS -->
-        <div class="work-filter rv" style="transition-delay:.1s">
-          <button class="wf-btn active" onclick="filterWork('all',this)">All Work</button>
-          <button class="wf-btn" onclick="filterWork('web',this)">Web Dev</button>
-          <button class="wf-btn" onclick="filterWork('mobile',this)">Mobile Apps</button>
-          <button class="wf-btn" onclick="filterWork('marketing',this)">Marketing</button>
-          <button class="wf-btn wa-filter" onclick="filterWork('automation',this)">WhatsApp & Bots</button>
-          <button class="wf-btn" onclick="filterWork('design',this)">Design</button>
-        </div>
-
-        <div class="work-grid rv" style="transition-delay:.2s" id="work-grid">
-
-          <!-- 1. Full Stack Web Platform — FEATURED -->
-          <div class="work-card featured" data-cat="web">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#08102B 0%,#1e2d5a 100%)">
-              <span class="wc-category cat-web">⚛ Web App</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.5rem">
-                <span style="font-size:3rem">🖥️</span>
-                <div style="display:flex;gap:.5rem">
-                  <span style="font-size:.6rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Vite + React</span>
-                  <span style="color:rgba(255,255,255,.3);font-size:.6rem">◆</span>
-                  <span style="font-size:.6rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Django REST</span>
-                </div>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">Enterprise Web Platform — Michael Infotech</div>
-              <p class="wc-desc">Full-stack web platform built for Michael Infotech's Coimbatore operations. Vite + React frontend, Django REST backend, fully deployed and server-managed. Includes admin dashboard, client portal, service listings, and lead capture system — integrated with CRM workflow.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">Vite + React</span>
-                <span class="wc-tag">Django</span>
-                <span class="wc-tag">REST API</span>
-                <span class="wc-tag">Deployment</span>
-                <span class="wc-tag">Server Mgmt</span>
-                <span class="wc-tag">CRM Integration</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">Live Production <span>· Full Stack</span></div>
-                <a href="#contact" class="wc-icon-link" title="Enquire">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. SEO Campaign -->
-          <div class="work-card" data-cat="marketing">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#1a3a1a 0%,#2d5a1e 100%)">
-              <span class="wc-category cat-marketing">📈 SEO</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem">
-                <span>📊</span>
-                <div style="display:flex;gap:.4rem;align-items:baseline">
-                  <span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">40+</span>
-                  <span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Keywords</span>
-                </div>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">SEO Domination — 40+ Keywords Ranked</div>
-              <p class="wc-desc">Achieved page-1 rankings for 40+ competitive keywords across multiple client websites. Complete technical SEO audit, on-page optimization, content strategy, schema markup, and geo-targeted local SEO — driving consistent organic traffic month over month.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">Technical SEO</span>
-                <span class="wc-tag">GEO</span>
-                <span class="wc-tag">On-Page</span>
-                <span class="wc-tag">Schema</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">40+ Keywords <span>· Page 1 Google</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. Meta + Google Ads -->
-          <div class="work-card" data-cat="marketing">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#2a1a08 0%,#5a3a0e 100%)">
-              <span class="wc-category cat-marketing">🎯 Paid Ads</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem">
-                <span>🎯</span>
-                <div style="display:flex;gap:.4rem;align-items:baseline">
-                  <span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">100+</span>
-                  <span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Campaigns</span>
-                </div>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">100+ Ad Campaigns — Google & Meta</div>
-              <p class="wc-desc">Managed 100+ paid campaigns across Google Ads (Search, Display, YouTube) and Meta Ads (Instagram, Facebook). Handled budgets up to ₹2 Lakh — audience targeting, A/B creative testing, funnel building, and conversion tracking for maximum ROAS.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">Google Ads</span>
-                <span class="wc-tag">Meta Ads</span>
-                <span class="wc-tag">₹2L Budget</span>
-                <span class="wc-tag">A/B Testing</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">₹2L+ Managed <span>· Max ROAS</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4. WhatsApp Bot -->
-          <div class="work-card" data-cat="automation">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#0a2a14 0%,#128C7E 100%)">
-              <span class="wc-category cat-automation">🤖 Automation</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.5rem">
-                <span>💬</span>
-                <span style="font-size:.62rem;letter-spacing:.15em;color:#DCF8C6;text-transform:uppercase;font-weight:700">Full Automation</span>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">WhatsApp Bot — Full Lead Automation</div>
-              <p class="wc-desc">Built a fully automated WhatsApp bot system for a client's business pipeline — lead capture, auto-reply sequences, appointment booking, CRM sync, and follow-up workflows. Zero manual intervention. Runs 24/7 across multiple conversation flows.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">WhatsApp API</span>
-                <span class="wc-tag">Bot Logic</span>
-                <span class="wc-tag">CRM Sync</span>
-                <span class="wc-tag">Auto-Reply</span>
-                <span class="wc-tag">Lead Pipeline</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">24/7 Running <span>· Zero Manual Work</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. React Native App -->
-          <div class="work-card" data-cat="mobile">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#1a0828 0%,#4a1a6a 100%)">
-              <span class="wc-category cat-mobile">📲 Mobile App</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem">
-                <span>📱</span>
-                <div style="display:flex;gap:.4rem;align-items:center">
-                  <span style="font-size:.6rem;letter-spacing:.12em;color:#e0b0ff;text-transform:uppercase;font-weight:700">React Native</span>
-                  <span style="color:rgba(255,255,255,.3);font-size:.5rem">+</span>
-                  <span style="font-size:.6rem;letter-spacing:.12em;color:#e0b0ff;text-transform:uppercase;font-weight:700">Django</span>
-                </div>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">Service Booking App — React Native</div>
-              <p class="wc-desc">Cross-platform mobile app (iOS + Android) built with React Native frontend and Django REST backend. Features include user authentication, service listing, booking flow, payment integration, push notifications, and an admin management panel.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">React Native</span>
-                <span class="wc-tag">Django Backend</span>
-                <span class="wc-tag">Push Notifications</span>
-                <span class="wc-tag">iOS / Android</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">3 Apps Built <span>· App Store Live</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6. Branding & Reels — FEATURED -->
-          <div class="work-card featured" data-cat="design">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#1a0a14 0%,#4a1a2a 50%,#2a0814 100%)">
-              <span class="wc-category cat-design">🎨 Design & Video</span>
-              <div class="wc-thumb-inner" style="gap:1.5rem">
-                <span>🎨</span>
-                <span>🎬</span>
-                <span>✨</span>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">Brand Identity & Reels — Michael Infotech</div>
-              <p class="wc-desc">Complete brand visual identity system designed in Canva Pro — logo usage guidelines, social media templates, marketing collateral, pitch decks, and banners. Plus a full library of premium short-form Reels and video content created with CapCut and Filmora. Consistent brand voice across all digital touchpoints, driving organic engagement.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">Canva Pro</span>
-                <span class="wc-tag">CapCut</span>
-                <span class="wc-tag">Filmora</span>
-                <span class="wc-tag">Reels</span>
-                <span class="wc-tag">Brand Identity</span>
-                <span class="wc-tag">Social Templates</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">Full Brand System <span>· Ongoing</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. CRM/ERP -->
-          <div class="work-card" data-cat="automation">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#071A3E 0%,#0E2660 100%)">
-              <span class="wc-category cat-web">🏢 CRM / ERP</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem">
-                <span>⚙️</span>
-                <span style="font-size:.62rem;letter-spacing:.15em;color:#80B4F4;text-transform:uppercase;font-weight:700">Enterprise Platform</span>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">CRM & ERP Implementation</div>
-              <p class="wc-desc">Configured and managed enterprise-grade CRM and ERP platforms for team-level operations. Setup sales pipelines, client lifecycle tracking, inventory modules, HR workflows, and automated reporting dashboards — significantly reducing manual operational overhead.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">CRM Setup</span>
-                <span class="wc-tag">ERP Config</span>
-                <span class="wc-tag">Sales Pipeline</span>
-                <span class="wc-tag">Automation</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">Team-Scale <span>· Production</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 8. Collaborative Web Projects -->
-          <div class="work-card" data-cat="web">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#071A3E 0%,#0E2660 100%)">
-              <span class="wc-category cat-web">👥 Team Projects</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.3rem">
-                <span>🌐</span>
-                <div style="display:flex;gap:.4rem;align-items:baseline">
-                  <span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#E8C040;line-height:1">8+</span>
-                  <span style="font-size:.65rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.1em">Web Apps</span>
-                </div>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">8+ Collaborative Full-Stack Web Projects</div>
-              <p class="wc-desc">Active contributing member on 8+ major full-stack web projects — spanning e-commerce platforms, service portals, booking systems, and management dashboards. Responsible for React frontend modules, Django API endpoints, database design, and production deployment.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">React</span>
-                <span class="wc-tag">Django</span>
-                <span class="wc-tag">Team Collab</span>
-                <span class="wc-tag">Full Stack</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">8+ Projects <span>· Team Member</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 9. SMM Organic Growth -->
-          <div class="work-card" data-cat="marketing">
-            <div class="wc-thumb" style="background:linear-gradient(135deg,#1a0a28 0%,#2d1050 100%)">
-              <span class="wc-category cat-design">📱 SMM</span>
-              <div class="wc-thumb-inner" style="flex-direction:column;gap:.4rem">
-                <span>📱</span>
-                <span style="font-size:.62rem;letter-spacing:.15em;color:#d4b0ff;text-transform:uppercase;font-weight:700">Organic Growth</span>
-              </div>
-            </div>
-            <div class="wc-body">
-              <div class="wc-title">Organic Social Media Growth Strategy</div>
-              <p class="wc-desc">Built and managed social media presence for multiple brands — purely organic, zero paid boost. Instagram, Facebook, LinkedIn, and YouTube content calendar, audience engagement strategy, hashtag research, and consistent Reels posting for sustained algorithmic reach.</p>
-              <div class="wc-tags">
-                <span class="wc-tag">Instagram</span>
-                <span class="wc-tag">Facebook</span>
-                <span class="wc-tag">LinkedIn</span>
-                <span class="wc-tag">Content Calendar</span>
-              </div>
-              <div class="wc-meta">
-                <div class="wc-result">100% Organic <span>· Multi-Brand</span></div>
-                <a href="#contact" class="wc-icon-link">→</a>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /work-grid -->
-      </div>
-    </section>
-
-    <!-- ══ STATS ══ -->
-    <div class="stats-strip">
-      <div class="stats-grid">
-        <div class="stat-box rv"><span class="stat-n"><span data-t="40" data-s="+">0</span></span><span class="stat-l">SEO Keywords Ranked</span></div>
-        <div class="stat-box rv" style="transition-delay:.1s"><span class="stat-n"><span data-t="100" data-s="+">0</span></span><span class="stat-l">Ad Campaigns Run</span></div>
-        <div class="stat-box rv" style="transition-delay:.2s"><span class="stat-n">₹<span data-t="2" data-s="L">0</span></span><span class="stat-l">Max Ad Budget Managed</span></div>
-        <div class="stat-box rv" style="transition-delay:.3s"><span class="stat-n"><span data-t="11" data-s="+">0</span></span><span class="stat-l">Projects Delivered</span></div>
-        <div class="stat-box rv" style="transition-delay:.4s"><span class="stat-n"><span data-t="5" data-s="yr">0</span></span><span class="stat-l">Years Experience</span></div>
-      </div>
-    </div>
-
-    <!-- ══ EXPERIENCE ══ -->
-    <section id="experience">
-      <div class="container">
-        <div class="rv">
-          <div class="s-tag">Career Journey</div>
-          <h2 class="s-head">Work <em>Experience</em></h2>
-          <div class="s-rule">
-            <div class="s-rule-line"></div>
-            <div class="s-rule-diamond"></div>
-            <div class="s-rule-line2"></div>
-          </div>
-        </div>
-        <div class="exp-split">
-
-          <div class="exp-entry rl" style="transition-delay:.15s">
-            <div class="exp-year">2024</div>
-            <div class="exp-badge current">◆ Current Role</div>
-            <div class="exp-date-range">2024 — Present</div>
-            <div class="exp-role">Branding Manager</div>
-            <div class="exp-company">Michael Infotech</div>
-            <div class="exp-loc">🌐 Main Branch: Dubai &nbsp;|&nbsp; 📍 Working from Coimbatore, TN</div>
-            <ul class="exp-points">
-              <li>Leading complete digital branding strategy for a Dubai-headquartered IT company</li>
-              <li>Managing multi-channel campaigns — SEO, Google Ads, Meta Ads, organic social</li>
-              <li>Overseeing Reels production, brand identity, and cross-platform content calendar</li>
-              <li>Technical lead for web and mobile development initiatives</li>
-              <li>Managing CRM/ERP systems and WhatsApp automation for client engagement</li>
-            </ul>
-          </div>
-
-          <div class="exp-entry rr" style="transition-delay:.25s">
-            <div class="exp-year">2019</div>
-            <div class="exp-badge">◆ 5 Years</div>
-            <div class="exp-date-range">2019 — 2024 &nbsp;·&nbsp; 5 Years Growth</div>
-            <div class="exp-role">Trainee → Marketing Specialist</div>
-            <div class="exp-company">Bumble Soft IT Solutions</div>
-            <div class="exp-loc">📍 Coimbatore, Tamil Nadu</div>
-            <ul class="exp-points">
-              <li>Joined as a Trainee — advanced to handling end-to-end digital campaigns</li>
-              <li>Ranked 40+ keywords and managed ₹2L+ ad budgets across Google & Meta</li>
-              <li>Built full-stack web apps (React + Django) from design to live deployment</li>
-              <li>Developed 3 production React Native mobile applications with Django backends</li>
-              <li>Built WhatsApp bot automation systems for client business pipelines</li>
-              <li>Active member across 8+ major collaborative full-stack web projects</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ CONTACT ══ -->
-    <section id="contact">
-      <div class="contact-layout">
-        <div class="c-left rv">
-          <div class="s-tag">Let's Connect</div>
-          <h2 class="s-head" style="color:white">Ready to <em>Build Something</em> Remarkable?</h2>
-          <div class="s-rule"><div class="s-rule-line" style="background:white"></div><div class="s-rule-diamond"></div><div class="s-rule-line2"></div></div>
-          <p class="contact-lede">Whether it's a high-converting campaign, a scalable web platform, or a complete brand overhaul — let's create something that moves people and moves the needle.</p>
-
-          <div class="c-detail">
-            <div class="c-icon">📞</div>
-            <div>
-              <div class="c-label">Phone</div>
-              <div class="c-val">+91 98946 5017</div>
-            </div>
-          </div>
-          <a href="https://wa.me/919894650017?text=Hi%20Sethu,%20I'd%20like%20to%20collaborate!" target="_blank" rel="noopener" class="wa-direct-btn">
-            <div class="wa-d-icon">💬</div>
-            <div class="wa-d-text">
-              <div class="wa-d-label">Fastest Response</div>
-              <div class="wa-d-val">Message on WhatsApp →</div>
-            </div>
-            <span class="wa-d-arrow">›</span>
-          </a>
-          <div class="c-detail">
-            <div class="c-icon">📧</div>
-            <div>
-              <div class="c-label">Email</div>
-              <div class="c-val"><a href="mailto:sethu89974@gmail.com">sethu89974@gmail.com</a></div>
-            </div>
-          </div>
-          <div class="c-detail">
-            <div class="c-icon">📍</div>
-            <div>
-              <div class="c-label">Location</div>
-              <div class="c-val">Coimbatore, Tamil Nadu</div>
-            </div>
-          </div>
-          <div class="c-detail">
-            <div class="c-icon">🏢</div>
-            <div>
-              <div class="c-label">Company</div>
-              <div class="c-val">Michael Infotech — Dubai (Main Branch)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="f-logo">Sethu<span>.</span>V</div>
-      <div class="f-copy">© 2025 Sethu.V · Branding Manager & Full Stack Developer · Coimbatore</div>
-      <div class="f-links">
-        <a href="#" class="f-link">Li</a>
-        <a href="#" class="f-link">Tw</a>
-        <a href="#" class="f-link">Gh</a>
-        <a href="#" class="f-link">Ig</a>
-      </div>
-    </footer>
-
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/919894650017?text=Hi%20Sethu!" class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
-      💬
-      <span class="wa-float-label">Chat with Sethu</span>
-    </a>
-
-    <script type="module">
-      import * as THREE from 'three';
-
-      const canvas = document.getElementById('bg-canvas');
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-
-      // Particle system
-      const particleCount = 2000;
-      const positions = new Float32Array(particleCount * 3);
-      for (let i = 0; i < particleCount; i++) {
-        positions[i*3] = (Math.random() - 0.5) * 80;
-        positions[i*3+1] = (Math.random() - 0.5) * 60;
-        positions[i*3+2] = (Math.random() - 0.5) * 60 - 30;
-      }
-      const particleGeo = new THREE.BufferGeometry();
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const particleMat = new THREE.PointsMaterial({ color: 0x4A8FE8, size: 0.08, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
-      const particles = new THREE.Points(particleGeo, particleMat);
-      scene.add(particles);
-
-      // Central glowing torus knot
-      const knotGeo = new THREE.TorusKnotGeometry(1.4, 0.3, 200, 32, 3, 4);
-      const knotMat = new THREE.MeshStandardMaterial({ color: 0x1A4FA8, emissive: 0x0ff, emissiveIntensity: 0.5, metalness: 0.7, roughness: 0.3 });
-      const knot = new THREE.Mesh(knotGeo, knotMat);
-      scene.add(knot);
-
-      // Lights
-      const ambientLight = new THREE.AmbientLight(0x111122);
-      scene.add(ambientLight);
-      const pointLight = new THREE.PointLight(0x0ff, 1.2);
-      pointLight.position.set(3, 3, 4);
-      scene.add(pointLight);
-      const backLight = new THREE.PointLight(0xffaa44, 0.6);
-      backLight.position.set(-2, 1, -3);
-      scene.add(backLight);
-
-      camera.position.z = 5;
-      camera.position.y = 1;
-      let time = 0;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        time += 0.006;
-        knot.rotation.x = time * 0.3;
-        knot.rotation.y = time * 0.5;
-        particles.rotation.y = time * 0.02;
-        particles.rotation.x = time * 0.01;
-        camera.position.x += (0 - camera.position.x) * 0.02;
-        camera.lookAt(0, 0, 0);
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    </script>
-
-    <script>
-    // CURSOR
-    const dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring');
-    let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
-    (function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
-    document.querySelectorAll('a,button,.skill-box,.exp-entry,.c-detail').forEach(el=>{
-      el.addEventListener('mouseenter',()=>ring.classList.add('big'));
-      el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
-    });
-
-    // SCROLL
-    window.addEventListener('scroll',()=>{
-      const p=(scrollY/(document.body.scrollHeight-innerHeight))*100;
-      document.getElementById('pbar').style.width=p+'%';
-      document.getElementById('nav').classList.toggle('scrolled',scrollY>60);
-    });
-
-    // REVEAL
-    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ro.unobserve(x.target)}})},{threshold:.1});
-    document.querySelectorAll('.rv,.rl,.rr').forEach(el=>ro.observe(el));
-
-    // COUNT UP
-    const co=new IntersectionObserver(e=>{e.forEach(x=>{
-      if(x.isIntersecting){
-        const el=x.target,t=+el.dataset.t,s=el.dataset.s||'';
-        let c=0,step=t/60;
-        const ti=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(ti)}el.textContent=Math.floor(c)+s},16);
-        co.unobserve(el);
-      }
-    })},{threshold:.5});
-    document.querySelectorAll('[data-t]').forEach(el=>co.observe(el));
-
-    // TYPED
-    const roles=['SEO / GEO Expert','Full Stack Developer','Brand Strategist','Google & Meta Ads Expert','WhatsApp Automation Builder','Digital Marketing Leader'];
-    let ri=0,ci=0,del=false;
-    const te=document.getElementById('tr');
-    function type(){
-      const cur=roles[ri];
-      if(!del){te.textContent=cur.substring(0,++ci);if(ci===cur.length){del=true;setTimeout(type,2000);return}}
-      else{te.textContent=cur.substring(0,--ci);if(!ci){del=false;ri=(ri+1)%roles.length}}
-      setTimeout(type,del?45:85);
-    }type();
-
-    // 3D TILT
-    const pf=document.getElementById('pf');
-    if(pf){
-      document.addEventListener('mousemove',e=>{
-        const r=pf.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-        const dx=(e.clientX-cx)/cx*6,dy=-(e.clientY-cy)/cy*4;
-        pf.style.transform=`perspective(1000px) rotateY(${dx}deg) rotateX(${dy}deg)`;
-      });
-      document.addEventListener('mouseleave',()=>pf.style.transform='');
-    }
-
-    // NAV
-    let open=false;
-    function toggleNav(){
-      open=!open;
-      document.getElementById('mob').classList.toggle('open',open);
-      const [b1,b2,b3]=['b1','b2','b3'].map(i=>document.getElementById(i));
-      b1.style.transform=open?'rotate(45deg) translate(5px,5px)':'';
-      b2.style.opacity=open?'0':'1';
-      b3.style.transform=open?'rotate(-45deg) translate(5px,-5px)':'';
-    }
-
-    // WORK FILTER
-    function filterWork(cat,btn){
-      document.querySelectorAll('.wf-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.work-card').forEach(card=>{
-        const match=cat==='all'||card.dataset.cat===cat;
-        card.classList.toggle('hidden',!match);
-      });
-    }
-    </script>
-    </body>
-    </html>
+<script type="module">
+  import * as THREE from 'three';
+  const canvas = document.getElementById('bg-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  const particleCount = 2000;
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) { positions[i*3] = (Math.random() - 0.5) * 80; positions[i*3+1] = (Math.random() - 0.5) * 60; positions[i*3+2] = (Math.random() - 0.5) * 60 - 30; }
+  const particleGeo = new THREE.BufferGeometry(); particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: 0x4A8FE8, size: 0.08, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
+  const particles = new THREE.Points(particleGeo, particleMat); scene.add(particles);
+  const knotGeo = new THREE.TorusKnotGeometry(1.4, 0.3, 200, 32, 3, 4);
+  const knotMat = new THREE.MeshStandardMaterial({ color: 0x1A4FA8, emissive: 0x0ff, emissiveIntensity: 0.5, metalness: 0.7, roughness: 0.3 });
+  const knot = new THREE.Mesh(knotGeo, knotMat); scene.add(knot);
+  const ambientLight = new THREE.AmbientLight(0x111122); scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0x0ff, 1.2); pointLight.position.set(3, 3, 4); scene.add(pointLight);
+  const backLight = new THREE.PointLight(0xffaa44, 0.6); backLight.position.set(-2, 1, -3); scene.add(backLight);
+  camera.position.z = 5; camera.position.y = 1;
+  let time = 0;
+  function animate() { requestAnimationFrame(animate); time += 0.006; knot.rotation.x = time * 0.3; knot.rotation.y = time * 0.5; particles.rotation.y = time * 0.02; particles.rotation.x = time * 0.01; camera.lookAt(0, 0, 0); renderer.render(scene, camera); }
+  animate();
+  window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+</script>
+<script>
+  const dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring'); let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+  document.querySelectorAll('a,button,.skill-box,.exp-entry,.c-detail').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('big'));el.addEventListener('mouseleave',()=>ring.classList.remove('big'))});
+  window.addEventListener('scroll',()=>{const p=(scrollY/(document.body.scrollHeight-innerHeight))*100;document.getElementById('pbar').style.width=p+'%';document.getElementById('nav').classList.toggle('scrolled',scrollY>60)});
+  const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ro.unobserve(x.target)}})},{threshold:.1}); document.querySelectorAll('.rv,.rl,.rr').forEach(el=>ro.observe(el));
+  const co=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.t,s=el.dataset.s||'';let c=0,step=t/60;const ti=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(ti)}el.textContent=Math.floor(c)+s},16);co.unobserve(el)}})},{threshold:.5}); document.querySelectorAll('[data-t]').forEach(el=>co.observe(el));
+  const roles=['SEO / GEO Expert','Full Stack Developer','Brand Strategist','Google & Meta Ads Expert','WhatsApp Automation Builder','Digital Marketing Leader']; let ri=0,ci=0,del=false; const te=document.getElementById('tr');
+  function type(){const cur=roles[ri];if(!del){te.textContent=cur.substring(0,++ci);if(ci===cur.length){del=true;setTimeout(type,2000);return}}else{te.textContent=cur.substring(0,--ci);if(!ci){del=false;ri=(ri+1)%roles.length}}setTimeout(type,del?45:85);}type();
+  const pf=document.getElementById('pf'); if(pf){document.addEventListener('mousemove',e=>{const r=pf.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;const dx=(e.clientX-cx)/cx*6,dy=-(e.clientY-cy)/cy*4;pf.style.transform=`perspective(1000px) rotateY(${dx}deg) rotateX(${dy}deg)`});document.addEventListener('mouseleave',()=>pf.style.transform='');}
+  let open=false; function toggleNav(){open=!open;document.getElementById('mob').classList.toggle('open',open);const [b1,b2,b3]=['b1','b2','b3'].map(i=>document.getElementById(i));b1.style.transform=open?'rotate(45deg) translate(5px,5px)':'';b2.style.opacity=open?'0':'1';b3.style.transform=open?'rotate(-45deg) translate(5px,-5px)':'';}
+  function filterWork(cat,btn){document.querySelectorAll('.wf-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.work-card').forEach(card=>{const match=cat==='all'||card.dataset.cat===cat;card.classList.toggle('hidden',!match)});}
+</script>
+</body>
+</html>
+```
